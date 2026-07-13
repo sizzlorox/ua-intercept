@@ -60,7 +60,7 @@ export function parseImport(jsonText) {
   }
   const mh = modHeaderProfiles(data)
   if (mh) {
-    const profiles = mh.map(fromModHeaderProfile).filter(Boolean)
+    const profiles = mh.flatMap(modHeaderToProfiles)
     if (!profiles.length) return { ok: false, error: { code: 'errNoProfiles' } }
     // Validate like the bundle path — a ModHeader UA with control chars would
     // otherwise poison the DNR batch on activation.
@@ -83,45 +83,56 @@ function modHeaderProfiles(data) {
   return null
 }
 
-// Convert one ModHeader profile to a UA Intercept profile, or null if it has no
-// active User-Agent header (nothing for us to import). ModHeader is header-only,
-// so imported profiles default to `headers` depth. id is left unset — mergeImport
-// assigns one. URL filters are kept only where they map cleanly to a domain
-// (ModHeader uses regex; our v1 is domain-scoped), so imports never fail closed.
-function fromModHeaderProfile(mh) {
-  if (!mh || typeof mh !== 'object') return null
+// Convert one ModHeader profile to UA Intercept profiles — ONE per User-Agent
+// header row, INCLUDING disabled ones (a ModHeader profile often holds several
+// UA strings the user toggles between; importing them all lets the user switch
+// the same way here). Empty array if the profile has no User-Agent header.
+// ModHeader is header-only, so imports default to `headers` depth; id is left
+// unset (mergeImport assigns one). The profile's URL filters carry to each.
+function modHeaderToProfiles(mh) {
+  if (!mh || typeof mh !== 'object') return []
   const headers = Array.isArray(mh.headers) ? mh.headers : []
-  const ua = headers.find(
-    (h) => h && h.enabled !== false && typeof h.name === 'string' && h.name.toLowerCase() === 'user-agent' && h.value
+  const uas = headers.filter(
+    (h) => h && typeof h.name === 'string' && h.name.toLowerCase() === 'user-agent' && h.value
   )
-  if (!ua) return null
-  // color/backgroundColor is often absent (ModHeader only exports styles on request)
-  // -> undefined here, normalizeProfile supplies the default. The UA value may be a
-  // ModHeader template like "{{uuid}}"; imported verbatim (the user's own data).
-  // Current exports use urlFilters/excludeUrlFilters; older ones use a single `filters`.
-  return normalizeProfile({
-    name: (typeof mh.title === 'string' && mh.title.trim()) || 'Imported profile',
-    userAgent: String(ua.value),
-    spoofDepth: 'headers',
-    presetId: null,
-    color: typeof mh.backgroundColor === 'string' ? mh.backgroundColor : undefined,
-    includeUrls: mapFilters([...toArray(mh.urlFilters), ...toArray(mh.filters)]),
-    excludeUrls: mapFilters(mh.excludeUrlFilters),
-  })
+  if (!uas.length) return []
+
+  const title = (typeof mh.title === 'string' && mh.title.trim()) || 'Imported profile'
+  // color/backgroundColor is often absent (ModHeader only exports styles on request);
+  // normalizeProfile supplies the default. UA values may be ModHeader templates like
+  // "{{uuid}}" — imported verbatim (the user's own data).
+  const color = typeof mh.backgroundColor === 'string' ? mh.backgroundColor : undefined
+  const includeUrls = mapFilters([...toArray(mh.urlFilters), ...toArray(mh.filters)])
+  const excludeUrls = mapFilters(mh.excludeUrlFilters)
+  const single = uas.length === 1
+
+  return uas.map((h, i) =>
+    normalizeProfile({
+      name: (typeof h.comment === 'string' && h.comment.trim()) || (single ? title : `${title} ${i + 1}`),
+      userAgent: String(h.value),
+      spoofDepth: 'headers',
+      presetId: null,
+      color,
+      includeUrls,
+      excludeUrls,
+    })
+  )
 }
 
 function toArray(v) {
   return Array.isArray(v) ? v : []
 }
 
-// ModHeader filter items may be strings or objects; keep only those that reduce
-// to a real domain (drop complex regexes rather than silently matching nothing).
+// ModHeader filter items may be strings or objects; ModHeader uses regex, so we
+// extract the domain (our v1 filters are domain-scoped) and store the clean
+// domain. Entries that don't resolve to a domain are dropped.
 function mapFilters(filters) {
   if (!Array.isArray(filters)) return []
   const out = []
   for (const item of filters) {
     const raw = typeof item === 'string' ? item : item && (item.urlRegex || item.url || item.value || item.pattern)
-    if (typeof raw === 'string' && raw && extractDomain(raw) && !out.includes(raw)) out.push(raw)
+    const domain = extractDomain(raw)
+    if (domain && !out.includes(domain)) out.push(domain)
   }
   return out
 }

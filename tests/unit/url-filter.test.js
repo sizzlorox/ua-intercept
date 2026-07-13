@@ -41,4 +41,11 @@ describe('urlFilterFrom', () => {
     const c = urlFilterFrom({ includeUrls: ['***', '://'] })
     expect(c.requestDomains).toEqual(['invalid.invalid'])
   })
+
+  it('extracts the domain from ModHeader-style regex patterns', () => {
+    const c = urlFilterFrom({
+      includeUrls: ['.*\\.facebook\\.com.*', 'https?://(.*\\.)?example\\.com/.*', 'plain.dev'],
+    })
+    expect(c.requestDomains).toEqual(['facebook.com', 'example.com', 'plain.dev'])
+  })
 })

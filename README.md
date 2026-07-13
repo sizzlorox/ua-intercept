@@ -86,7 +86,7 @@ Client-Hint handling and `navigator.*` rewriting happen **only** in `full` depth
 
 ## Import from ModHeader
 
-**Import** accepts both UA Intercept's own JSON export and **ModHeader** exports (a profile object, an array of them, or the REST `{ profile }` wrapper). From a ModHeader profile it pulls the enabled `User-Agent` header into a new `headers`-depth profile, carrying over the title, color, and any URL filters that map to a domain. ModHeader profiles without a User-Agent header are skipped; only the UA is imported (its other header types are ignored).
+**Import** accepts both UA Intercept's own JSON export and **ModHeader** exports (a profile object, an array of them, or the REST `{ profile }` wrapper). From a ModHeader profile it imports **every** `User-Agent` row — enabled *and* disabled — as its own `headers`-depth profile (ModHeader users often keep several UA strings and toggle between them; this brings them all across so you can switch the same way). It carries over the title (or a row's comment as the name), color, and URL filters — ModHeader's regex patterns are unescaped to extract the host (e.g. `https?://(.*\.)?facebook\.com/.*` → `facebook.com`). Profiles without a User-Agent header are skipped; only the UA is imported (ModHeader's other header types are ignored).
 
 ## Known limitations
 

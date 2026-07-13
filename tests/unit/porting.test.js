@@ -80,10 +80,44 @@ describe('parseImport — ModHeader compatibility', () => {
     expect(r.profiles[0].userAgent).toBe(UA)
   })
 
-  it('skips a disabled User-Agent header (no importable profile -> errNoProfiles)', () => {
+  it('imports a DISABLED User-Agent row too (user toggles between them in ModHeader)', () => {
     const r = parseImport(JSON.stringify(mhProfile({ headers: [{ enabled: false, name: 'User-Agent', value: UA }] })))
-    expect(r.ok).toBe(false)
-    expect(r.error.code).toBe('errNoProfiles')
+    expect(r.ok).toBe(true)
+    expect(r.profiles).toHaveLength(1)
+    expect(r.profiles[0].userAgent).toBe(UA)
+  })
+
+  it('imports EVERY User-Agent row as a separate profile (enabled and disabled)', () => {
+    const r = parseImport(
+      JSON.stringify(
+        mhProfile({
+          title: 'Devices',
+          headers: [
+            { enabled: true, name: 'User-Agent', value: 'UA-A' },
+            { enabled: false, name: 'User-Agent', value: 'UA-B' },
+            { enabled: true, name: 'X-Other', value: 'ignored' },
+            { enabled: true, name: 'User-Agent', value: 'UA-C' },
+          ],
+        })
+      )
+    )
+    expect(r.ok).toBe(true)
+    expect(r.profiles.map((p) => p.userAgent)).toEqual(['UA-A', 'UA-B', 'UA-C'])
+    expect(r.profiles.map((p) => p.name)).toEqual(['Devices 1', 'Devices 2', 'Devices 3'])
+  })
+
+  it('uses a header comment as the profile name when present', () => {
+    const r = parseImport(
+      JSON.stringify(
+        mhProfile({
+          headers: [
+            { enabled: true, name: 'User-Agent', value: 'UA-A', comment: 'Desktop' },
+            { enabled: true, name: 'User-Agent', value: 'UA-B', comment: 'Mobile' },
+          ],
+        })
+      )
+    )
+    expect(r.profiles.map((p) => p.name)).toEqual(['Desktop', 'Mobile'])
   })
 
   it('rejects a ModHeader profile with no User-Agent header', () => {
@@ -102,6 +136,21 @@ describe('parseImport — ModHeader compatibility', () => {
     )
     expect(r.ok).toBe(true)
     expect(r.profiles[0].includeUrls).toEqual(['example.com'])
+  })
+
+  it('extracts domains from ModHeader regex URL filters (the common whitelist form)', () => {
+    const r = parseImport(
+      JSON.stringify(
+        mhProfile({
+          urlFilters: [
+            { enabled: true, urlRegex: 'https?://(.*\\.)?facebook\\.com/.*' },
+            { enabled: true, urlRegex: '.*\\.google\\.com.*' },
+          ],
+        })
+      )
+    )
+    expect(r.ok).toBe(true)
+    expect(r.profiles[0].includeUrls).toEqual(['facebook.com', 'google.com'])
   })
 
   it('supports the older single `filters` array (type urls, urlRegex)', () => {

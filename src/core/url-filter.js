@@ -30,20 +30,20 @@ function toDomains(patterns) {
   return out
 }
 
-// "*://*.example.com/*" | "https://foo.com/bar" | "example.com" -> "example.com"
-// Exported so importers can keep only filters that map cleanly to a domain.
+// Extract a registrable host from a domain, a match pattern, a full URL, OR a
+// ModHeader-style regex. Examples that all yield "example.com":
+//   "example.com" · "*://*.example.com/*" · "https://foo.com/bar" (-> "foo.com")
+//   ".*\.example\.com.*" · "https?://(.*\.)?example\.com/.*"
+// Returns null if no domain-like token is found.
 export function extractDomain(pattern) {
   if (typeof pattern !== 'string') return null
   let s = pattern.trim()
   if (!s) return null
-  s = s.replace(/^[a-z*]+:\/\//i, '') // strip scheme (incl "*://")
-  s = s.split('/')[0] // drop path
-  s = s.split('?')[0].split('#')[0]
-  s = s.replace(/^\*+\.?/, '') // strip leading wildcard label ("*." or "*")
-  s = s.replace(/:\d+$/, '') // strip :port
-  s = s.toLowerCase()
-  // A DNR requestDomain must be a canonical dotted host: no leftover wildcards, only
-  // host chars, and at least one dot (drops bare words like "https" left by a regex).
-  if (!s || s.includes('*') || !/^[a-z0-9.-]+$/.test(s) || !s.includes('.')) return null
-  return s
+  s = s.replace(/\\/g, '') // drop regex escapes: \. -> .
+  s = s.replace(/^[a-z?*]+:\/\//i, '') // strip scheme, incl "*://" and ModHeader "https?://"
+  // Take the FIRST domain-like token (label(.label)+.tld). Not splitting on "/" or
+  // "?" first — those appear as regex quantifiers in ModHeader patterns like
+  // "https?://(.*\.)?example\.com/.*" and must not truncate the host.
+  const m = s.toLowerCase().match(/([a-z0-9-]+\.)+[a-z]{2,}/)
+  return m ? m[0] : null
 }
