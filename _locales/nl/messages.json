@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "Negeren"
+  },
+  "tokenHint": {
+    "message": "Ingeschakelde tokens worden aan je echte User-Agent toegevoegd (of vervangen deze in de modus “replace”)."
+  },
+  "tokenAdd": {
+    "message": "+ token"
+  },
+  "tokenAppend": {
+    "message": "toevoegen"
+  },
+  "tokenReplace": {
+    "message": "vervangen"
+  },
+  "tokenEnabled": {
+    "message": "Ingeschakeld"
+  },
+  "tokenMode": {
+    "message": "Modus"
+  },
+  "tokenValue": {
+    "message": "User-Agent-token"
   }
 }

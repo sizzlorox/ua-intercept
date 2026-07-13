@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "Закрыть"
+  },
+  "tokenHint": {
+    "message": "Включённые токены добавляются к вашему реальному User-Agent (или заменяют его в режиме “replace”)."
+  },
+  "tokenAdd": {
+    "message": "+ токен"
+  },
+  "tokenAppend": {
+    "message": "добавить"
+  },
+  "tokenReplace": {
+    "message": "заменить"
+  },
+  "tokenEnabled": {
+    "message": "Включён"
+  },
+  "tokenMode": {
+    "message": "Режим"
+  },
+  "tokenValue": {
+    "message": "Токен User-Agent"
   }
 }

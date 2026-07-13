@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "Ignorer"
+  },
+  "tokenHint": {
+    "message": "Les tokens activés sont ajoutés à votre véritable User-Agent (ou le remplacent, en mode “replace”)."
+  },
+  "tokenAdd": {
+    "message": "+ token"
+  },
+  "tokenAppend": {
+    "message": "ajouter"
+  },
+  "tokenReplace": {
+    "message": "remplacer"
+  },
+  "tokenEnabled": {
+    "message": "Activé"
+  },
+  "tokenMode": {
+    "message": "Mode"
+  },
+  "tokenValue": {
+    "message": "Token User-Agent"
   }
 }

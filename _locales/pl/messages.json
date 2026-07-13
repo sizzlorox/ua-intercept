@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "Odrzuć"
+  },
+  "tokenHint": {
+    "message": "Włączone tokeny są dołączane do Twojego prawdziwego User-Agent (lub go zastępują w trybie „zastąp”)."
+  },
+  "tokenAdd": {
+    "message": "+ token"
+  },
+  "tokenAppend": {
+    "message": "dołącz"
+  },
+  "tokenReplace": {
+    "message": "zastąp"
+  },
+  "tokenEnabled": {
+    "message": "Włączony"
+  },
+  "tokenMode": {
+    "message": "Tryb"
+  },
+  "tokenValue": {
+    "message": "Token User-Agent"
   }
 }

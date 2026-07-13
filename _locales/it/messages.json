@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "Ignora"
+  },
+  "tokenHint": {
+    "message": "I token abilitati vengono aggiunti al tuo User-Agent reale (o lo sostituiscono, in modalità “replace”)."
+  },
+  "tokenAdd": {
+    "message": "+ token"
+  },
+  "tokenAppend": {
+    "message": "aggiungi"
+  },
+  "tokenReplace": {
+    "message": "sostituisci"
+  },
+  "tokenEnabled": {
+    "message": "Abilitato"
+  },
+  "tokenMode": {
+    "message": "Modalità"
+  },
+  "tokenValue": {
+    "message": "Token User-Agent"
   }
 }

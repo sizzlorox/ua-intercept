@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "Dispensar"
+  },
+  "tokenHint": {
+    "message": "Os tokens ativados são adicionados ao seu User-Agent real (ou o substituem, no modo “substituir”)."
+  },
+  "tokenAdd": {
+    "message": "+ token"
+  },
+  "tokenAppend": {
+    "message": "adicionar"
+  },
+  "tokenReplace": {
+    "message": "substituir"
+  },
+  "tokenEnabled": {
+    "message": "Ativado"
+  },
+  "tokenMode": {
+    "message": "Modo"
+  },
+  "tokenValue": {
+    "message": "Token do User-Agent"
   }
 }
