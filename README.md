@@ -131,10 +131,8 @@ src/
   ui/                   popup + options page
   shared/               storage + i18n helpers
 tests/unit/             vitest specs for src/core/
-specs/001-ua-switcher/  full spec, plan, contracts, validation quickstart
+scripts/                build.mjs, validate.mjs, gen-icons.mjs
 ```
-
-See [`specs/001-ua-switcher/`](./specs/001-ua-switcher) for the spec, plan, data model, contracts, and the validation quickstart.
 
 ## Contributing
 

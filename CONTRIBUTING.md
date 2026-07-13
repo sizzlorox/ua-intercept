@@ -41,7 +41,7 @@ Errors surfaced to users are returned from core as stable **codes** (e.g. `errNa
 4. Match the surrounding style (2-space indent, single quotes, ES modules, no semicolons in JS files that omit them). No linter is enforced; keep diffs minimal and idiomatic.
 5. Open a PR using the template. Describe what and why; link any issue.
 
-Browser-only behavior (DNR application, the `document_start` race, incognito) can't be unit-tested — validate it by hand against `specs/001-ua-switcher/quickstart.md` and note what you checked in the PR.
+Browser-only behavior (DNR application, the `document_start` race, incognito) can't be unit-tested — validate it by hand by loading the extension in a real browser and note what you checked in the PR.
 
 ## Adding a language
 

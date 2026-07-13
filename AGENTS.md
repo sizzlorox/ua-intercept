@@ -41,7 +41,6 @@ src/
 tests/unit/             Vitest specs covering the pure src/core/ modules
 scripts/                build.mjs (per-browser packages), validate.mjs, gen-icons.mjs
 dist/                   build output (gitignored): dist/chrome, dist/firefox
-specs/001-ua-switcher/  design docs: spec, plan, data-model, contracts, quickstart
 ```
 
 ## The one rule that matters
@@ -60,7 +59,7 @@ Corollary: **user-facing text is localized.** Never hardcode English strings in 
 ## Testing
 
 - New or changed **core logic requires a unit test** in `tests/unit/`. Run `npm test`; it must be green.
-- Browser-only behavior (DNR application, the `document_start` race, incognito, the toolbar badge) can't be unit-tested — validate by hand against `specs/001-ua-switcher/quickstart.md` and note what you checked.
+- Browser-only behavior (DNR application, the `document_start` race, incognito, the toolbar badge) can't be unit-tested — validate by hand by loading the extension in a real browser and note what you checked.
 - The mock in `tests/setup/chrome-mock.js` stubs the `chrome.*` surface the tests touch.
 
 ## Adding things
