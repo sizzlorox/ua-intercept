@@ -1,6 +1,6 @@
 {
   "name": "ua-intercept",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Chrome MV3 User-Agent switcher with importable/exportable profiles and selectable spoof depth.",
   "private": true,
   "type": "module",

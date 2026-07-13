@@ -6,6 +6,17 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-07-13
+
+### Fixed
+
+- **ModHeader import** now brings in **every** `User-Agent` row — enabled *and* disabled — as its own profile (ModHeader users often keep several UA strings and toggle between them). Previously only the first enabled one was imported.
+- **ModHeader URL filters** (regex) are now unescaped so the host is extracted (e.g. `https?://(.*\.)?facebook\.com/.*` → `facebook.com`) instead of being silently dropped.
+
+### Changed
+
+- **ModHeader-style UA list**: each profile is a row with an activate checkbox, click-to-edit name, and inline remove; a `+ New` sits at the list bottom, and the popup gains an inline remove on each row. (Removed the up/down reorder arrows.)
+
 ## [0.1.0] - 2026-07-13
 
 ### Added
@@ -26,5 +37,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Full spoof does not cover Web Workers and is detectable (page-readable config channel; JS-accessor overrides). See the README.
 
-[Unreleased]: https://github.com/sizzlorox/ua-intercept/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/sizzlorox/ua-intercept/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/sizzlorox/ua-intercept/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/sizzlorox/ua-intercept/releases/tag/v0.1.0
