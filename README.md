@@ -134,6 +134,26 @@ tests/unit/             vitest specs for src/core/
 scripts/                build.mjs, validate.mjs, gen-icons.mjs
 ```
 
+## Commit convention
+
+This project follows [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+<type>(<optional scope>): <short imperative summary>
+
+<optional body explaining the "why">
+```
+
+**Types:** `feat` · `fix` · `docs` · `refactor` · `test` · `chore` · `ci` · `build` · `perf` · `style`. Add a scope when it clarifies the area, e.g. `feat(ui):`, `fix(import):`, `docs:`.
+
+Keep the summary imperative and ≤ ~72 characters; put the reasoning in the body if it isn't obvious. Examples:
+
+```
+feat(ui): ModHeader-style UA list with inline activate/remove
+fix(import): import disabled ModHeader User-Agent rows too
+docs: document the commit convention
+```
+
 ## Contributing
 
 Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) and our [Code of Conduct](./CODE_OF_CONDUCT.md). Good first issues: add a preset, add/improve a translation, or help validate the `document_start` race on real sites.
