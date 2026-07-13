@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "مُبدّل User-Agent مع ملفات تعريف للاستيراد/التصدير وعمق انتحال قابل للاختيار (الترويسات فقط أو كامل)."
+  },
+  "on": {
+    "message": "تشغيل"
+  },
+  "off": {
+    "message": "إيقاف"
+  },
+  "activeProfile": {
+    "message": "الملف التعريفي النشط"
+  },
+  "noActiveProfile": {
+    "message": "لا يوجد ملف تعريفي نشط"
+  },
+  "noProfilesYet": {
+    "message": "لا توجد ملفات تعريفية بعد. انقر على “جديد” لإنشاء واحد."
+  },
+  "depthFullShort": {
+    "message": "انتحال كامل"
+  },
+  "depthHeadersShort": {
+    "message": "الترويسات فقط"
+  },
+  "mobile": {
+    "message": "جوّال"
+  },
+  "badgeHeader": {
+    "message": "ترويسة"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "حقيقي"
+  },
+  "btnNew": {
+    "message": "جديد"
+  },
+  "btnManage": {
+    "message": "إدارة"
+  },
+  "btnImport": {
+    "message": "استيراد"
+  },
+  "btnExport": {
+    "message": "تصدير"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — الملفات التعريفية"
+  },
+  "profiles": {
+    "message": "الملفات التعريفية"
+  },
+  "placeholderSelect": {
+    "message": "اختر ملفًا تعريفيًا، أو أنشئ واحدًا جديدًا."
+  },
+  "editHeading": {
+    "message": "تحرير الملف التعريفي"
+  },
+  "fieldPreset": {
+    "message": "البدء من إعداد مسبق"
+  },
+  "presetCustom": {
+    "message": "مخصص…"
+  },
+  "fieldName": {
+    "message": "الاسم"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (العمق الكامل)"
+  },
+  "fieldMobile": {
+    "message": "جوّال"
+  },
+  "depthLegend": {
+    "message": "عمق الانتحال"
+  },
+  "depthFull": {
+    "message": "كامل — يعيد أيضًا كتابة navigator.* في الصفحة"
+  },
+  "depthHeaders": {
+    "message": "الترويسات فقط"
+  },
+  "depthNote": {
+    "message": "الانتحال الكامل لا يشمل Web Workers (قيد معروف)."
+  },
+  "fieldInclude": {
+    "message": "تضمين عناوين URL (واحد لكل سطر؛ فارغ = جميع المواقع). محدد بالنطاق."
+  },
+  "fieldExclude": {
+    "message": "استبعاد عناوين URL (واحد لكل سطر)"
+  },
+  "btnSave": {
+    "message": "حفظ"
+  },
+  "btnDuplicate": {
+    "message": "تكرار"
+  },
+  "btnDelete": {
+    "message": "حذف"
+  },
+  "moveUp": {
+    "message": "نقل لأعلى"
+  },
+  "moveDown": {
+    "message": "نقل لأسفل"
+  },
+  "unnamed": {
+    "message": "(بدون اسم)"
+  },
+  "copySuffix": {
+    "message": "نسخة"
+  },
+  "toastSaved": {
+    "message": "تم الحفظ"
+  },
+  "toastDuplicated": {
+    "message": "تم التكرار"
+  },
+  "toastDeleted": {
+    "message": "تم الحذف"
+  },
+  "toastExported": {
+    "message": "تم تصدير $count$ ملف تعريفي",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "تم استيراد $count$ ملف تعريفي",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "حذف الملف التعريفي “$name$”؟",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "ملف تعريف غير صالح"
+  },
+  "errNameRequired": {
+    "message": "الاسم مطلوب"
+  },
+  "errUaRequired": {
+    "message": "User-Agent مطلوب"
+  },
+  "errUaControl": {
+    "message": "يحتوي User-Agent على أحرف تحكم"
+  },
+  "errDepth": {
+    "message": "يجب أن يكون عمق الانتحال “headers” أو “full”"
+  },
+  "errIncludeType": {
+    "message": "يجب أن تكون عناوين URL المُضمَّنة قائمة من الأسطر النصية"
+  },
+  "errExcludeType": {
+    "message": "يجب أن تكون عناوين URL المُستبعَدة قائمة من الأسطر النصية"
+  },
+  "errBadJson": {
+    "message": "ملف غير معروف (JSON غير صالح)"
+  },
+  "errUnrecognized": {
+    "message": "ملف غير معروف"
+  },
+  "errNewerVersion": {
+    "message": "هذا الملف من إصدار أحدث من UA Intercept"
+  },
+  "errNoProfiles": {
+    "message": "لم يتم العثور على ملفات تعريف في هذا الملف"
+  },
+  "errProfileInvalid": {
+    "message": "ملف التعريف $index$ غير صالح: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "التحقق من التحديثات على GitHub"
+  },
+  "checkUpdatesHint": {
+    "message": "معطّل افتراضيًا. عند التفعيل، يستعلم من API العام لـ GitHub عن أحدث إصدار مرة واحدة يوميًا. لا تُرسَل أي بيانات."
+  },
+  "updateAvailable": {
+    "message": "يتوفّر تحديث: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "عرض الإصدار"
+  },
+  "updateDismiss": {
+    "message": "تجاهل"
+  }
+}

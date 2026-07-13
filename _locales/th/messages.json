@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "ตัวสลับ User-Agent พร้อมนำเข้า/ส่งออกโปรไฟล์ และเลือกระดับการปลอมได้ (เฉพาะ headers หรือ full)"
+  },
+  "on": {
+    "message": "เปิด"
+  },
+  "off": {
+    "message": "ปิด"
+  },
+  "activeProfile": {
+    "message": "โปรไฟล์ที่ใช้งาน"
+  },
+  "noActiveProfile": {
+    "message": "ไม่มีโปรไฟล์ที่ใช้งาน"
+  },
+  "noProfilesYet": {
+    "message": "ยังไม่มีโปรไฟล์ คลิก “ใหม่” เพื่อสร้าง"
+  },
+  "depthFullShort": {
+    "message": "ปลอมแปลงเต็มรูปแบบ"
+  },
+  "depthHeadersShort": {
+    "message": "เฉพาะ headers"
+  },
+  "mobile": {
+    "message": "มือถือ"
+  },
+  "badgeHeader": {
+    "message": "header"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "จริง"
+  },
+  "btnNew": {
+    "message": "ใหม่"
+  },
+  "btnManage": {
+    "message": "จัดการ"
+  },
+  "btnImport": {
+    "message": "นำเข้า"
+  },
+  "btnExport": {
+    "message": "ส่งออก"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — โปรไฟล์"
+  },
+  "profiles": {
+    "message": "โปรไฟล์"
+  },
+  "placeholderSelect": {
+    "message": "เลือกโปรไฟล์ หรือสร้างใหม่"
+  },
+  "editHeading": {
+    "message": "แก้ไขโปรไฟล์"
+  },
+  "fieldPreset": {
+    "message": "เริ่มจากค่าที่ตั้งไว้"
+  },
+  "presetCustom": {
+    "message": "กำหนดเอง…"
+  },
+  "fieldName": {
+    "message": "ชื่อ"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (ระดับเต็ม)"
+  },
+  "fieldMobile": {
+    "message": "มือถือ"
+  },
+  "depthLegend": {
+    "message": "ระดับการปลอมแปลง"
+  },
+  "depthFull": {
+    "message": "เต็มรูปแบบ — เขียนทับ navigator.* ในหน้าเว็บด้วย"
+  },
+  "depthHeaders": {
+    "message": "เฉพาะ headers"
+  },
+  "depthNote": {
+    "message": "การปลอมแปลงเต็มรูปแบบไม่ครอบคลุม Web Workers (ข้อจำกัดที่ทราบอยู่แล้ว)"
+  },
+  "fieldInclude": {
+    "message": "URL ที่รวม (หนึ่งรายการต่อบรรทัด; ว่าง = ทุกเว็บไซต์) จำกัดตามโดเมน"
+  },
+  "fieldExclude": {
+    "message": "URL ที่ยกเว้น (หนึ่งรายการต่อบรรทัด)"
+  },
+  "btnSave": {
+    "message": "บันทึก"
+  },
+  "btnDuplicate": {
+    "message": "ทำสำเนา"
+  },
+  "btnDelete": {
+    "message": "ลบ"
+  },
+  "moveUp": {
+    "message": "เลื่อนขึ้น"
+  },
+  "moveDown": {
+    "message": "เลื่อนลง"
+  },
+  "unnamed": {
+    "message": "(ไม่มีชื่อ)"
+  },
+  "copySuffix": {
+    "message": "สำเนา"
+  },
+  "toastSaved": {
+    "message": "บันทึกแล้ว"
+  },
+  "toastDuplicated": {
+    "message": "ทำสำเนาแล้ว"
+  },
+  "toastDeleted": {
+    "message": "ลบแล้ว"
+  },
+  "toastExported": {
+    "message": "ส่งออก $count$ โปรไฟล์แล้ว",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "นำเข้า $count$ โปรไฟล์แล้ว",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "ลบโปรไฟล์ “$name$” หรือไม่?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "โปรไฟล์ไม่ถูกต้อง"
+  },
+  "errNameRequired": {
+    "message": "ต้องระบุชื่อ"
+  },
+  "errUaRequired": {
+    "message": "ต้องระบุ User-Agent"
+  },
+  "errUaControl": {
+    "message": "User-Agent มีอักขระควบคุม"
+  },
+  "errDepth": {
+    "message": "ระดับการปลอมแปลงต้องเป็น “headers” หรือ “full”"
+  },
+  "errIncludeType": {
+    "message": "URL ที่รวมต้องเป็นรายการข้อความทีละบรรทัด"
+  },
+  "errExcludeType": {
+    "message": "URL ที่ยกเว้นต้องเป็นรายการข้อความทีละบรรทัด"
+  },
+  "errBadJson": {
+    "message": "ไม่รู้จักไฟล์ (ไม่ใช่ JSON ที่ถูกต้อง)"
+  },
+  "errUnrecognized": {
+    "message": "ไม่รู้จักไฟล์"
+  },
+  "errNewerVersion": {
+    "message": "ไฟล์นี้มาจาก UA Intercept เวอร์ชันที่ใหม่กว่า"
+  },
+  "errNoProfiles": {
+    "message": "ไม่พบโปรไฟล์ในไฟล์นี้"
+  },
+  "errProfileInvalid": {
+    "message": "โปรไฟล์ $index$ ไม่ถูกต้อง: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "ตรวจหาอัปเดตจาก GitHub"
+  },
+  "checkUpdatesHint": {
+    "message": "ปิดโดยค่าเริ่มต้น เมื่อเปิด จะสอบถาม API สาธารณะของ GitHub เพื่อดูรุ่นล่าสุดวันละครั้ง ไม่มีการส่งข้อมูลใด ๆ"
+  },
+  "updateAvailable": {
+    "message": "มีอัปเดต: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "ดูรุ่นที่ออกใหม่"
+  },
+  "updateDismiss": {
+    "message": "ปิด"
+  }
+}

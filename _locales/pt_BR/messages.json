@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "Alternador de User-Agent com perfis de importação/exportação e nível de simulação selecionável (apenas headers ou full)."
+  },
+  "on": {
+    "message": "Ativado"
+  },
+  "off": {
+    "message": "Desativado"
+  },
+  "activeProfile": {
+    "message": "Perfil ativo"
+  },
+  "noActiveProfile": {
+    "message": "Nenhum perfil ativo"
+  },
+  "noProfilesYet": {
+    "message": "Nenhum perfil ainda. Clique em “Novo” para criar um."
+  },
+  "depthFullShort": {
+    "message": "simulação completa"
+  },
+  "depthHeadersShort": {
+    "message": "apenas headers"
+  },
+  "mobile": {
+    "message": "móvel"
+  },
+  "badgeHeader": {
+    "message": "header"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "real"
+  },
+  "btnNew": {
+    "message": "Novo"
+  },
+  "btnManage": {
+    "message": "Gerenciar"
+  },
+  "btnImport": {
+    "message": "Importar"
+  },
+  "btnExport": {
+    "message": "Exportar"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — Perfis"
+  },
+  "profiles": {
+    "message": "Perfis"
+  },
+  "placeholderSelect": {
+    "message": "Selecione um perfil ou crie um novo."
+  },
+  "editHeading": {
+    "message": "Editar perfil"
+  },
+  "fieldPreset": {
+    "message": "Começar a partir de predefinição"
+  },
+  "presetCustom": {
+    "message": "Personalizado…"
+  },
+  "fieldName": {
+    "message": "Nome"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (profundidade completa)"
+  },
+  "fieldMobile": {
+    "message": "Móvel"
+  },
+  "depthLegend": {
+    "message": "Profundidade da simulação"
+  },
+  "depthFull": {
+    "message": "Completa — também reescreve navigator.* na página"
+  },
+  "depthHeaders": {
+    "message": "Apenas headers"
+  },
+  "depthNote": {
+    "message": "A simulação completa não cobre Web Workers (uma limitação conhecida)."
+  },
+  "fieldInclude": {
+    "message": "Incluir URLs (uma por linha; vazio = todos os sites). Restrito ao domínio."
+  },
+  "fieldExclude": {
+    "message": "Excluir URLs (uma por linha)"
+  },
+  "btnSave": {
+    "message": "Salvar"
+  },
+  "btnDuplicate": {
+    "message": "Duplicar"
+  },
+  "btnDelete": {
+    "message": "Excluir"
+  },
+  "moveUp": {
+    "message": "Mover para cima"
+  },
+  "moveDown": {
+    "message": "Mover para baixo"
+  },
+  "unnamed": {
+    "message": "(sem nome)"
+  },
+  "copySuffix": {
+    "message": "cópia"
+  },
+  "toastSaved": {
+    "message": "Salvo"
+  },
+  "toastDuplicated": {
+    "message": "Duplicado"
+  },
+  "toastDeleted": {
+    "message": "Excluído"
+  },
+  "toastExported": {
+    "message": "$count$ perfil(is) exportado(s)",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "$count$ perfil(is) importado(s)",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "Excluir o perfil “$name$”?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "Perfil inválido"
+  },
+  "errNameRequired": {
+    "message": "O nome é obrigatório"
+  },
+  "errUaRequired": {
+    "message": "O User-Agent é obrigatório"
+  },
+  "errUaControl": {
+    "message": "O User-Agent contém caracteres de controle"
+  },
+  "errDepth": {
+    "message": "A profundidade de simulação deve ser “cabeçalhos” ou “completo”"
+  },
+  "errIncludeType": {
+    "message": "As URLs a incluir devem ser uma lista de linhas de texto"
+  },
+  "errExcludeType": {
+    "message": "As URLs a excluir devem ser uma lista de linhas de texto"
+  },
+  "errBadJson": {
+    "message": "Arquivo não reconhecido (JSON inválido)"
+  },
+  "errUnrecognized": {
+    "message": "Arquivo não reconhecido"
+  },
+  "errNewerVersion": {
+    "message": "Este arquivo é de uma versão mais recente do UA Intercept"
+  },
+  "errNoProfiles": {
+    "message": "Nenhum perfil encontrado neste arquivo"
+  },
+  "errProfileInvalid": {
+    "message": "O perfil $index$ é inválido: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "Verificar atualizações no GitHub"
+  },
+  "checkUpdatesHint": {
+    "message": "Desativado por padrão. Quando ativado, consulta a API pública do GitHub uma vez por dia para ver a versão mais recente. Nenhum dado é enviado."
+  },
+  "updateAvailable": {
+    "message": "Atualização disponível: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "Ver versão"
+  },
+  "updateDismiss": {
+    "message": "Dispensar"
+  }
+}

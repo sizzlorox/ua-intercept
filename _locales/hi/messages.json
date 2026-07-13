@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "प्रोफ़ाइल import/export और चयन-योग्य spoof गहराई (सिर्फ़ headers या full) वाला User-Agent स्विचर।"
+  },
+  "on": {
+    "message": "चालू"
+  },
+  "off": {
+    "message": "बंद"
+  },
+  "activeProfile": {
+    "message": "सक्रिय प्रोफ़ाइल"
+  },
+  "noActiveProfile": {
+    "message": "कोई सक्रिय प्रोफ़ाइल नहीं"
+  },
+  "noProfilesYet": {
+    "message": "अभी कोई प्रोफ़ाइल नहीं। बनाने के लिए “नया” पर क्लिक करें।"
+  },
+  "depthFullShort": {
+    "message": "पूर्ण स्पूफ़"
+  },
+  "depthHeadersShort": {
+    "message": "केवल हेडर"
+  },
+  "mobile": {
+    "message": "मोबाइल"
+  },
+  "badgeHeader": {
+    "message": "हेडर"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "वास्तविक"
+  },
+  "btnNew": {
+    "message": "नया"
+  },
+  "btnManage": {
+    "message": "प्रबंधित करें"
+  },
+  "btnImport": {
+    "message": "आयात"
+  },
+  "btnExport": {
+    "message": "निर्यात"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — प्रोफ़ाइल"
+  },
+  "profiles": {
+    "message": "प्रोफ़ाइल"
+  },
+  "placeholderSelect": {
+    "message": "कोई प्रोफ़ाइल चुनें, या नई बनाएँ।"
+  },
+  "editHeading": {
+    "message": "प्रोफ़ाइल संपादित करें"
+  },
+  "fieldPreset": {
+    "message": "प्रीसेट से शुरू करें"
+  },
+  "presetCustom": {
+    "message": "कस्टम…"
+  },
+  "fieldName": {
+    "message": "नाम"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (पूर्ण गहराई)"
+  },
+  "fieldMobile": {
+    "message": "मोबाइल"
+  },
+  "depthLegend": {
+    "message": "स्पूफ़ गहराई"
+  },
+  "depthFull": {
+    "message": "पूर्ण — पेज में navigator.* को भी फिर से लिखता है"
+  },
+  "depthHeaders": {
+    "message": "केवल हेडर"
+  },
+  "depthNote": {
+    "message": "पूर्ण स्पूफ़ Web Workers को कवर नहीं करता (एक ज्ञात सीमा)।"
+  },
+  "fieldInclude": {
+    "message": "URLs शामिल करें (प्रति पंक्ति एक; खाली = सभी साइट)। डोमेन-स्कोप्ड।"
+  },
+  "fieldExclude": {
+    "message": "URLs बाहर रखें (प्रति पंक्ति एक)"
+  },
+  "btnSave": {
+    "message": "सहेजें"
+  },
+  "btnDuplicate": {
+    "message": "डुप्लिकेट करें"
+  },
+  "btnDelete": {
+    "message": "हटाएँ"
+  },
+  "moveUp": {
+    "message": "ऊपर ले जाएँ"
+  },
+  "moveDown": {
+    "message": "नीचे ले जाएँ"
+  },
+  "unnamed": {
+    "message": "(अनाम)"
+  },
+  "copySuffix": {
+    "message": "कॉपी"
+  },
+  "toastSaved": {
+    "message": "सहेजा गया"
+  },
+  "toastDuplicated": {
+    "message": "डुप्लिकेट किया गया"
+  },
+  "toastDeleted": {
+    "message": "हटाया गया"
+  },
+  "toastExported": {
+    "message": "$count$ प्रोफ़ाइल निर्यात की गईं",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "$count$ प्रोफ़ाइल आयात की गईं",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "प्रोफ़ाइल “$name$” हटाएँ?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "अमान्य प्रोफ़ाइल"
+  },
+  "errNameRequired": {
+    "message": "नाम आवश्यक है"
+  },
+  "errUaRequired": {
+    "message": "User-Agent आवश्यक है"
+  },
+  "errUaControl": {
+    "message": "User-Agent में नियंत्रण वर्ण मौजूद हैं"
+  },
+  "errDepth": {
+    "message": "स्पूफ़ गहराई “हेडर” या “पूर्ण” होनी चाहिए"
+  },
+  "errIncludeType": {
+    "message": "शामिल URLs पाठ पंक्तियों की सूची होनी चाहिए"
+  },
+  "errExcludeType": {
+    "message": "बहिष्कृत URLs पाठ पंक्तियों की सूची होनी चाहिए"
+  },
+  "errBadJson": {
+    "message": "अपरिचित फ़ाइल (मान्य JSON नहीं)"
+  },
+  "errUnrecognized": {
+    "message": "अपरिचित फ़ाइल"
+  },
+  "errNewerVersion": {
+    "message": "यह फ़ाइल UA Intercept के किसी नए संस्करण से है"
+  },
+  "errNoProfiles": {
+    "message": "इस फ़ाइल में कोई प्रोफ़ाइल नहीं मिली"
+  },
+  "errProfileInvalid": {
+    "message": "प्रोफ़ाइल $index$ अमान्य है: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "अपडेट के लिए GitHub जाँचें"
+  },
+  "checkUpdatesHint": {
+    "message": "डिफ़ॉल्ट रूप से बंद। चालू होने पर, दिन में एक बार GitHub के सार्वजनिक API से नवीनतम रिलीज़ की जानकारी माँगता है। कोई डेटा नहीं भेजा जाता।"
+  },
+  "updateAvailable": {
+    "message": "अपडेट उपलब्ध: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "रिलीज़ देखें"
+  },
+  "updateDismiss": {
+    "message": "खारिज करें"
+  }
+}

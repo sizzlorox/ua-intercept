@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "Chuyển đổi User-Agent với hồ sơ nhập/xuất và độ sâu giả mạo tùy chọn (chỉ headers hoặc đầy đủ)."
+  },
+  "on": {
+    "message": "Bật"
+  },
+  "off": {
+    "message": "Tắt"
+  },
+  "activeProfile": {
+    "message": "Hồ sơ đang dùng"
+  },
+  "noActiveProfile": {
+    "message": "Không có hồ sơ đang dùng"
+  },
+  "noProfilesYet": {
+    "message": "Chưa có hồ sơ nào. Nhấp “Mới” để tạo một hồ sơ."
+  },
+  "depthFullShort": {
+    "message": "giả mạo đầy đủ"
+  },
+  "depthHeadersShort": {
+    "message": "chỉ headers"
+  },
+  "mobile": {
+    "message": "di động"
+  },
+  "badgeHeader": {
+    "message": "header"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "thật"
+  },
+  "btnNew": {
+    "message": "Mới"
+  },
+  "btnManage": {
+    "message": "Quản lý"
+  },
+  "btnImport": {
+    "message": "Nhập"
+  },
+  "btnExport": {
+    "message": "Xuất"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — Hồ sơ"
+  },
+  "profiles": {
+    "message": "Hồ sơ"
+  },
+  "placeholderSelect": {
+    "message": "Chọn một hồ sơ, hoặc tạo hồ sơ mới."
+  },
+  "editHeading": {
+    "message": "Chỉnh sửa hồ sơ"
+  },
+  "fieldPreset": {
+    "message": "Bắt đầu từ mẫu có sẵn"
+  },
+  "presetCustom": {
+    "message": "Tùy chỉnh…"
+  },
+  "fieldName": {
+    "message": "Tên"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (mức đầy đủ)"
+  },
+  "fieldMobile": {
+    "message": "Di động"
+  },
+  "depthLegend": {
+    "message": "Mức độ giả mạo"
+  },
+  "depthFull": {
+    "message": "Đầy đủ — cũng ghi đè navigator.* trong trang"
+  },
+  "depthHeaders": {
+    "message": "Chỉ headers"
+  },
+  "depthNote": {
+    "message": "Giả mạo đầy đủ không áp dụng cho Web Workers (một giới hạn đã biết)."
+  },
+  "fieldInclude": {
+    "message": "URL đưa vào (mỗi dòng một URL; để trống = tất cả trang web). Theo phạm vi tên miền."
+  },
+  "fieldExclude": {
+    "message": "URL loại trừ (mỗi dòng một URL)"
+  },
+  "btnSave": {
+    "message": "Lưu"
+  },
+  "btnDuplicate": {
+    "message": "Nhân bản"
+  },
+  "btnDelete": {
+    "message": "Xóa"
+  },
+  "moveUp": {
+    "message": "Di chuyển lên"
+  },
+  "moveDown": {
+    "message": "Di chuyển xuống"
+  },
+  "unnamed": {
+    "message": "(chưa đặt tên)"
+  },
+  "copySuffix": {
+    "message": "bản sao"
+  },
+  "toastSaved": {
+    "message": "Đã lưu"
+  },
+  "toastDuplicated": {
+    "message": "Đã nhân bản"
+  },
+  "toastDeleted": {
+    "message": "Đã xóa"
+  },
+  "toastExported": {
+    "message": "Đã xuất $count$ hồ sơ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "Đã nhập $count$ hồ sơ",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "Xóa hồ sơ “$name$”?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "Hồ sơ không hợp lệ"
+  },
+  "errNameRequired": {
+    "message": "Cần nhập tên"
+  },
+  "errUaRequired": {
+    "message": "Cần nhập User-Agent"
+  },
+  "errUaControl": {
+    "message": "User-Agent chứa ký tự điều khiển"
+  },
+  "errDepth": {
+    "message": "Mức độ giả mạo phải là “headers” hoặc “full”"
+  },
+  "errIncludeType": {
+    "message": "URL đưa vào phải là danh sách các dòng văn bản"
+  },
+  "errExcludeType": {
+    "message": "URL loại trừ phải là danh sách các dòng văn bản"
+  },
+  "errBadJson": {
+    "message": "Không nhận dạng được tệp (JSON không hợp lệ)"
+  },
+  "errUnrecognized": {
+    "message": "Không nhận dạng được tệp"
+  },
+  "errNewerVersion": {
+    "message": "Tệp này thuộc phiên bản UA Intercept mới hơn"
+  },
+  "errNoProfiles": {
+    "message": "Không tìm thấy hồ sơ nào trong tệp này"
+  },
+  "errProfileInvalid": {
+    "message": "Hồ sơ $index$ không hợp lệ: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "Kiểm tra cập nhật trên GitHub"
+  },
+  "checkUpdatesHint": {
+    "message": "Mặc định tắt. Khi bật, hỏi API công khai của GitHub về bản phát hành mới nhất mỗi ngày một lần. Không gửi dữ liệu nào."
+  },
+  "updateAvailable": {
+    "message": "Đã có bản cập nhật: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "Xem bản phát hành"
+  },
+  "updateDismiss": {
+    "message": "Bỏ qua"
+  }
+}

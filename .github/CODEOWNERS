@@ -1,0 +1,9 @@
+# Default owner for everything in the repo.
+* @sizzlorox
+
+# Security-sensitive paths — always require maintainer review.
+/.github/ @sizzlorox
+/manifest.json @sizzlorox
+/src/background/ @sizzlorox
+/src/injected/ @sizzlorox
+/src/core/porting.js @sizzlorox

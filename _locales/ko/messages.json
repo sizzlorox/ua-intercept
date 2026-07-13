@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "프로필 가져오기/내보내기와 선택 가능한 스푸핑 강도(헤더만 또는 전체)를 갖춘 User-Agent 전환기."
+  },
+  "on": {
+    "message": "켜짐"
+  },
+  "off": {
+    "message": "꺼짐"
+  },
+  "activeProfile": {
+    "message": "활성 프로필"
+  },
+  "noActiveProfile": {
+    "message": "활성 프로필 없음"
+  },
+  "noProfilesYet": {
+    "message": "아직 프로필이 없습니다. “새로 만들기”를 클릭해 만드세요."
+  },
+  "depthFullShort": {
+    "message": "전체 스푸핑"
+  },
+  "depthHeadersShort": {
+    "message": "헤더만"
+  },
+  "mobile": {
+    "message": "모바일"
+  },
+  "badgeHeader": {
+    "message": "헤더"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "실제"
+  },
+  "btnNew": {
+    "message": "새로 만들기"
+  },
+  "btnManage": {
+    "message": "관리"
+  },
+  "btnImport": {
+    "message": "가져오기"
+  },
+  "btnExport": {
+    "message": "내보내기"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — 프로필"
+  },
+  "profiles": {
+    "message": "프로필"
+  },
+  "placeholderSelect": {
+    "message": "프로필을 선택하거나 새로 만드세요."
+  },
+  "editHeading": {
+    "message": "프로필 편집"
+  },
+  "fieldPreset": {
+    "message": "프리셋에서 시작"
+  },
+  "presetCustom": {
+    "message": "사용자 지정…"
+  },
+  "fieldName": {
+    "message": "이름"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (전체 강도)"
+  },
+  "fieldMobile": {
+    "message": "모바일"
+  },
+  "depthLegend": {
+    "message": "스푸핑 강도"
+  },
+  "depthFull": {
+    "message": "전체 — 페이지의 navigator.*도 재작성"
+  },
+  "depthHeaders": {
+    "message": "헤더만"
+  },
+  "depthNote": {
+    "message": "전체 스푸핑은 Web Workers를 다루지 않습니다(알려진 제한 사항)."
+  },
+  "fieldInclude": {
+    "message": "포함할 URL (한 줄에 하나씩, 비워두면 모든 사이트). 도메인 범위."
+  },
+  "fieldExclude": {
+    "message": "제외할 URL (한 줄에 하나씩)"
+  },
+  "btnSave": {
+    "message": "저장"
+  },
+  "btnDuplicate": {
+    "message": "복제"
+  },
+  "btnDelete": {
+    "message": "삭제"
+  },
+  "moveUp": {
+    "message": "위로 이동"
+  },
+  "moveDown": {
+    "message": "아래로 이동"
+  },
+  "unnamed": {
+    "message": "(이름 없음)"
+  },
+  "copySuffix": {
+    "message": "복사본"
+  },
+  "toastSaved": {
+    "message": "저장됨"
+  },
+  "toastDuplicated": {
+    "message": "복제됨"
+  },
+  "toastDeleted": {
+    "message": "삭제됨"
+  },
+  "toastExported": {
+    "message": "프로필 $count$개 내보냄",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "프로필 $count$개 가져옴",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "프로필 “$name$”을(를) 삭제할까요?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "유효하지 않은 프로필"
+  },
+  "errNameRequired": {
+    "message": "이름을 입력하세요"
+  },
+  "errUaRequired": {
+    "message": "User-Agent를 입력하세요"
+  },
+  "errUaControl": {
+    "message": "User-Agent에 제어 문자가 포함되어 있습니다"
+  },
+  "errDepth": {
+    "message": "스푸핑 수준은 “headers” 또는 “full”이어야 합니다"
+  },
+  "errIncludeType": {
+    "message": "포함 URL은 텍스트 줄 목록이어야 합니다"
+  },
+  "errExcludeType": {
+    "message": "제외 URL은 텍스트 줄 목록이어야 합니다"
+  },
+  "errBadJson": {
+    "message": "인식할 수 없는 파일입니다(유효한 JSON 아님)"
+  },
+  "errUnrecognized": {
+    "message": "인식할 수 없는 파일"
+  },
+  "errNewerVersion": {
+    "message": "이 파일은 최신 버전의 UA Intercept에서 생성되었습니다"
+  },
+  "errNoProfiles": {
+    "message": "이 파일에서 프로필을 찾을 수 없습니다"
+  },
+  "errProfileInvalid": {
+    "message": "프로필 $index$이(가) 유효하지 않습니다: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "GitHub에서 업데이트 확인"
+  },
+  "checkUpdatesHint": {
+    "message": "기본적으로 꺼져 있습니다. 켜면 하루에 한 번 GitHub 공개 API에 최신 릴리스를 요청합니다. 어떤 데이터도 전송되지 않습니다."
+  },
+  "updateAvailable": {
+    "message": "업데이트 사용 가능: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "릴리스 보기"
+  },
+  "updateDismiss": {
+    "message": "닫기"
+  }
+}

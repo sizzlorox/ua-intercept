@@ -1,0 +1,42 @@
+{
+  "name": "ua-intercept",
+  "version": "0.1.0",
+  "description": "Chrome MV3 User-Agent switcher with importable/exportable profiles and selectable spoof depth.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/sizzlorox/ua-intercept#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sizzlorox/ua-intercept.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sizzlorox/ua-intercept/issues"
+  },
+  "keywords": [
+    "chrome-extension",
+    "manifest-v3",
+    "user-agent",
+    "user-agent-switcher",
+    "client-hints",
+    "declarativenetrequest",
+    "modheader"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate": "node scripts/validate.mjs",
+    "icons": "node scripts/gen-icons.mjs",
+    "build": "node scripts/build.mjs all",
+    "build:chrome": "node scripts/build.mjs chrome",
+    "build:firefox": "node scripts/build.mjs firefox",
+    "start:firefox": "npm run build:firefox && npx --yes web-ext run --source-dir dist/firefox",
+    "lint:firefox": "npm run build:firefox && npx --yes web-ext lint --source-dir dist/firefox"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.9"
+  }
+}

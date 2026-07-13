@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "Смена User-Agent: импорт/экспорт профилей, выбор глубины подмены (headers или full)."
+  },
+  "on": {
+    "message": "Вкл."
+  },
+  "off": {
+    "message": "Выкл."
+  },
+  "activeProfile": {
+    "message": "Активный профиль"
+  },
+  "noActiveProfile": {
+    "message": "Нет активного профиля"
+  },
+  "noProfilesYet": {
+    "message": "Профилей пока нет. Нажмите «Создать», чтобы добавить."
+  },
+  "depthFullShort": {
+    "message": "полная подмена"
+  },
+  "depthHeadersShort": {
+    "message": "только заголовки"
+  },
+  "mobile": {
+    "message": "мобильный"
+  },
+  "badgeHeader": {
+    "message": "заголовок"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "реальный"
+  },
+  "btnNew": {
+    "message": "Создать"
+  },
+  "btnManage": {
+    "message": "Управление"
+  },
+  "btnImport": {
+    "message": "Импорт"
+  },
+  "btnExport": {
+    "message": "Экспорт"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — Профили"
+  },
+  "profiles": {
+    "message": "Профили"
+  },
+  "placeholderSelect": {
+    "message": "Выберите профиль или создайте новый."
+  },
+  "editHeading": {
+    "message": "Редактирование профиля"
+  },
+  "fieldPreset": {
+    "message": "На основе шаблона"
+  },
+  "presetCustom": {
+    "message": "Свой…"
+  },
+  "fieldName": {
+    "message": "Название"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (полная глубина)"
+  },
+  "fieldMobile": {
+    "message": "Мобильный"
+  },
+  "depthLegend": {
+    "message": "Глубина подмены"
+  },
+  "depthFull": {
+    "message": "Полная — также переопределяет navigator.* на странице"
+  },
+  "depthHeaders": {
+    "message": "Только заголовки"
+  },
+  "depthNote": {
+    "message": "Полная подмена не распространяется на Web Workers (известное ограничение)."
+  },
+  "fieldInclude": {
+    "message": "Включённые URL (по одному в строке; пусто = все сайты). По доменам."
+  },
+  "fieldExclude": {
+    "message": "Исключённые URL (по одному в строке)"
+  },
+  "btnSave": {
+    "message": "Сохранить"
+  },
+  "btnDuplicate": {
+    "message": "Дублировать"
+  },
+  "btnDelete": {
+    "message": "Удалить"
+  },
+  "moveUp": {
+    "message": "Вверх"
+  },
+  "moveDown": {
+    "message": "Вниз"
+  },
+  "unnamed": {
+    "message": "(без названия)"
+  },
+  "copySuffix": {
+    "message": "копия"
+  },
+  "toastSaved": {
+    "message": "Сохранено"
+  },
+  "toastDuplicated": {
+    "message": "Продублировано"
+  },
+  "toastDeleted": {
+    "message": "Удалено"
+  },
+  "toastExported": {
+    "message": "Экспортировано профилей: $count$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "Импортировано профилей: $count$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "Удалить профиль «$name$»?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "Неверный профиль"
+  },
+  "errNameRequired": {
+    "message": "Укажите имя"
+  },
+  "errUaRequired": {
+    "message": "Укажите User-Agent"
+  },
+  "errUaControl": {
+    "message": "User-Agent содержит управляющие символы"
+  },
+  "errDepth": {
+    "message": "Глубина подмены должна быть «заголовки» или «полная»"
+  },
+  "errIncludeType": {
+    "message": "Включаемые URL должны быть списком текстовых строк"
+  },
+  "errExcludeType": {
+    "message": "Исключаемые URL должны быть списком текстовых строк"
+  },
+  "errBadJson": {
+    "message": "Файл не распознан (неверный JSON)"
+  },
+  "errUnrecognized": {
+    "message": "Файл не распознан"
+  },
+  "errNewerVersion": {
+    "message": "Этот файл создан в более новой версии UA Intercept"
+  },
+  "errNoProfiles": {
+    "message": "В этом файле нет профилей"
+  },
+  "errProfileInvalid": {
+    "message": "Профиль $index$ недействителен: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "Проверять обновления на GitHub"
+  },
+  "checkUpdatesHint": {
+    "message": "По умолчанию выключено. Если включено, раз в день запрашивает последний релиз через публичный API GitHub. Никакие данные не отправляются."
+  },
+  "updateAvailable": {
+    "message": "Доступно обновление: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "Открыть релиз"
+  },
+  "updateDismiss": {
+    "message": "Закрыть"
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "İçe/dışa aktarılan profiller ve seçilebilir sahte derinlik (yalnızca headers ya da full) sunan User-Agent değiştirici."
+  },
+  "on": {
+    "message": "Açık"
+  },
+  "off": {
+    "message": "Kapalı"
+  },
+  "activeProfile": {
+    "message": "Etkin profil"
+  },
+  "noActiveProfile": {
+    "message": "Etkin profil yok"
+  },
+  "noProfilesYet": {
+    "message": "Henüz profil yok. Oluşturmak için “Yeni” düğmesine tıklayın."
+  },
+  "depthFullShort": {
+    "message": "tam sahtecilik"
+  },
+  "depthHeadersShort": {
+    "message": "yalnızca başlıklar"
+  },
+  "mobile": {
+    "message": "mobil"
+  },
+  "badgeHeader": {
+    "message": "başlık"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "gerçek"
+  },
+  "btnNew": {
+    "message": "Yeni"
+  },
+  "btnManage": {
+    "message": "Yönet"
+  },
+  "btnImport": {
+    "message": "İçe Aktar"
+  },
+  "btnExport": {
+    "message": "Dışa Aktar"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — Profiller"
+  },
+  "profiles": {
+    "message": "Profiller"
+  },
+  "placeholderSelect": {
+    "message": "Bir profil seçin veya yeni bir tane oluşturun."
+  },
+  "editHeading": {
+    "message": "Profili düzenle"
+  },
+  "fieldPreset": {
+    "message": "Hazır ayardan başla"
+  },
+  "presetCustom": {
+    "message": "Özel…"
+  },
+  "fieldName": {
+    "message": "Ad"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (tam derinlik)"
+  },
+  "fieldMobile": {
+    "message": "Mobil"
+  },
+  "depthLegend": {
+    "message": "Sahtecilik derinliği"
+  },
+  "depthFull": {
+    "message": "Tam — sayfadaki navigator.* değerlerini de yeniden yazar"
+  },
+  "depthHeaders": {
+    "message": "Yalnızca başlıklar"
+  },
+  "depthNote": {
+    "message": "Tam sahtecilik, Web Workers kapsamını içermez (bilinen bir kısıtlama)."
+  },
+  "fieldInclude": {
+    "message": "URL'leri dahil et (her satıra bir tane; boş = tüm siteler). Etki alanı kapsamlı."
+  },
+  "fieldExclude": {
+    "message": "URL'leri hariç tut (her satıra bir tane)"
+  },
+  "btnSave": {
+    "message": "Kaydet"
+  },
+  "btnDuplicate": {
+    "message": "Çoğalt"
+  },
+  "btnDelete": {
+    "message": "Sil"
+  },
+  "moveUp": {
+    "message": "Yukarı taşı"
+  },
+  "moveDown": {
+    "message": "Aşağı taşı"
+  },
+  "unnamed": {
+    "message": "(adsız)"
+  },
+  "copySuffix": {
+    "message": "kopya"
+  },
+  "toastSaved": {
+    "message": "Kaydedildi"
+  },
+  "toastDuplicated": {
+    "message": "Çoğaltıldı"
+  },
+  "toastDeleted": {
+    "message": "Silindi"
+  },
+  "toastExported": {
+    "message": "$count$ profil dışa aktarıldı",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "$count$ profil içe aktarıldı",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "“$name$” profili silinsin mi?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "Geçersiz profil"
+  },
+  "errNameRequired": {
+    "message": "Ad gerekli"
+  },
+  "errUaRequired": {
+    "message": "User-Agent gerekli"
+  },
+  "errUaControl": {
+    "message": "User-Agent kontrol karakterleri içeriyor"
+  },
+  "errDepth": {
+    "message": "Sahteleme derinliği “headers” veya “full” olmalı"
+  },
+  "errIncludeType": {
+    "message": "Dahil edilen URL'ler metin satırlarından oluşan bir liste olmalı"
+  },
+  "errExcludeType": {
+    "message": "Hariç tutulan URL'ler metin satırlarından oluşan bir liste olmalı"
+  },
+  "errBadJson": {
+    "message": "Tanınmayan dosya (geçerli JSON değil)"
+  },
+  "errUnrecognized": {
+    "message": "Tanınmayan dosya"
+  },
+  "errNewerVersion": {
+    "message": "Bu dosya UA Intercept'in daha yeni bir sürümünden"
+  },
+  "errNoProfiles": {
+    "message": "Bu dosyada profil bulunamadı"
+  },
+  "errProfileInvalid": {
+    "message": "$index$ numaralı profil geçersiz: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "Güncellemeler için GitHub'ı denetle"
+  },
+  "checkUpdatesHint": {
+    "message": "Varsayılan olarak kapalı. Açıkken, günde bir kez GitHub'ın herkese açık API'sinden en son sürümü sorar. Hiçbir veri gönderilmez."
+  },
+  "updateAvailable": {
+    "message": "Güncelleme mevcut: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "Sürümü görüntüle"
+  },
+  "updateDismiss": {
+    "message": "Kapat"
+  }
+}

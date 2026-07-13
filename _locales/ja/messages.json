@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "インポート／エクスポート可能なプロファイルと、選択式の偽装の深さ（ヘッダーのみ または フル）を備えた User-Agent スイッチャー。"
+  },
+  "on": {
+    "message": "オン"
+  },
+  "off": {
+    "message": "オフ"
+  },
+  "activeProfile": {
+    "message": "有効なプロファイル"
+  },
+  "noActiveProfile": {
+    "message": "有効なプロファイルなし"
+  },
+  "noProfilesYet": {
+    "message": "プロファイルがありません。「新規」をクリックして作成してください。"
+  },
+  "depthFullShort": {
+    "message": "フル偽装"
+  },
+  "depthHeadersShort": {
+    "message": "ヘッダーのみ"
+  },
+  "mobile": {
+    "message": "モバイル"
+  },
+  "badgeHeader": {
+    "message": "ヘッダー"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "実際の値"
+  },
+  "btnNew": {
+    "message": "新規"
+  },
+  "btnManage": {
+    "message": "管理"
+  },
+  "btnImport": {
+    "message": "インポート"
+  },
+  "btnExport": {
+    "message": "エクスポート"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — プロファイル"
+  },
+  "profiles": {
+    "message": "プロファイル"
+  },
+  "placeholderSelect": {
+    "message": "プロファイルを選択するか、新規作成してください。"
+  },
+  "editHeading": {
+    "message": "プロファイルを編集"
+  },
+  "fieldPreset": {
+    "message": "プリセットから開始"
+  },
+  "presetCustom": {
+    "message": "カスタム…"
+  },
+  "fieldName": {
+    "message": "名前"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform（フル偽装時）"
+  },
+  "fieldMobile": {
+    "message": "モバイル"
+  },
+  "depthLegend": {
+    "message": "偽装の深さ"
+  },
+  "depthFull": {
+    "message": "フル — ページ内の navigator.* も書き換え"
+  },
+  "depthHeaders": {
+    "message": "ヘッダーのみ"
+  },
+  "depthNote": {
+    "message": "フル偽装は Web Workers には適用されません（既知の制限）。"
+  },
+  "fieldInclude": {
+    "message": "対象URL（1行に1つ、空欄=すべてのサイト）。ドメイン単位で適用。"
+  },
+  "fieldExclude": {
+    "message": "除外URL（1行に1つ）"
+  },
+  "btnSave": {
+    "message": "保存"
+  },
+  "btnDuplicate": {
+    "message": "複製"
+  },
+  "btnDelete": {
+    "message": "削除"
+  },
+  "moveUp": {
+    "message": "上へ移動"
+  },
+  "moveDown": {
+    "message": "下へ移動"
+  },
+  "unnamed": {
+    "message": "（名称未設定）"
+  },
+  "copySuffix": {
+    "message": "コピー"
+  },
+  "toastSaved": {
+    "message": "保存しました"
+  },
+  "toastDuplicated": {
+    "message": "複製しました"
+  },
+  "toastDeleted": {
+    "message": "削除しました"
+  },
+  "toastExported": {
+    "message": "$count$ 件のプロファイルをエクスポートしました",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "$count$ 件のプロファイルをインポートしました",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "プロファイル“$name$”を削除しますか？",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "プロファイルが無効です"
+  },
+  "errNameRequired": {
+    "message": "名前を入力してください"
+  },
+  "errUaRequired": {
+    "message": "User-Agent を入力してください"
+  },
+  "errUaControl": {
+    "message": "User-Agent に制御文字が含まれています"
+  },
+  "errDepth": {
+    "message": "偽装の深さは「ヘッダーのみ」または「完全」を指定してください"
+  },
+  "errIncludeType": {
+    "message": "対象 URL はテキスト行のリストで指定してください"
+  },
+  "errExcludeType": {
+    "message": "除外 URL はテキスト行のリストで指定してください"
+  },
+  "errBadJson": {
+    "message": "認識できないファイルです（有効な JSON ではありません）"
+  },
+  "errUnrecognized": {
+    "message": "認識できないファイルです"
+  },
+  "errNewerVersion": {
+    "message": "このファイルは新しいバージョンの UA Intercept で作成されています"
+  },
+  "errNoProfiles": {
+    "message": "このファイルにプロファイルが見つかりません"
+  },
+  "errProfileInvalid": {
+    "message": "プロファイル $index$ が無効です: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "GitHub で更新を確認"
+  },
+  "checkUpdatesHint": {
+    "message": "既定ではオフです。オンにすると、1 日に 1 回 GitHub の公開 API に最新リリースを問い合わせます。データは送信されません。"
+  },
+  "updateAvailable": {
+    "message": "更新があります: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "リリースを見る"
+  },
+  "updateDismiss": {
+    "message": "閉じる"
+  }
+}

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+*.zip
+*.log
+.env*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local AI assistant / spec-tooling — not part of the extension
+.claude/
+.specify/

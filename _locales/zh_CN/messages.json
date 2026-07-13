@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "User-Agent 切换器，支持配置的导入/导出，并可选择伪装深度（仅 headers 或完整）。"
+  },
+  "on": {
+    "message": "开"
+  },
+  "off": {
+    "message": "关"
+  },
+  "activeProfile": {
+    "message": "当前配置"
+  },
+  "noActiveProfile": {
+    "message": "无当前配置"
+  },
+  "noProfilesYet": {
+    "message": "暂无配置。点击“新建”来创建一个。"
+  },
+  "depthFullShort": {
+    "message": "完整伪装"
+  },
+  "depthHeadersShort": {
+    "message": "仅 headers"
+  },
+  "mobile": {
+    "message": "移动端"
+  },
+  "badgeHeader": {
+    "message": "header"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "真实"
+  },
+  "btnNew": {
+    "message": "新建"
+  },
+  "btnManage": {
+    "message": "管理"
+  },
+  "btnImport": {
+    "message": "导入"
+  },
+  "btnExport": {
+    "message": "导出"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — 配置"
+  },
+  "profiles": {
+    "message": "配置"
+  },
+  "placeholderSelect": {
+    "message": "选择一个配置，或新建一个。"
+  },
+  "editHeading": {
+    "message": "编辑配置"
+  },
+  "fieldPreset": {
+    "message": "从预设开始"
+  },
+  "presetCustom": {
+    "message": "自定义…"
+  },
+  "fieldName": {
+    "message": "名称"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform（完整深度）"
+  },
+  "fieldMobile": {
+    "message": "移动端"
+  },
+  "depthLegend": {
+    "message": "伪装深度"
+  },
+  "depthFull": {
+    "message": "完整 — 同时改写页面中的 navigator.*"
+  },
+  "depthHeaders": {
+    "message": "仅 headers"
+  },
+  "depthNote": {
+    "message": "完整伪装不覆盖 Web Workers（已知限制）。"
+  },
+  "fieldInclude": {
+    "message": "包含 URL（每行一个；留空 = 所有站点）。按域名生效。"
+  },
+  "fieldExclude": {
+    "message": "排除 URL（每行一个）"
+  },
+  "btnSave": {
+    "message": "保存"
+  },
+  "btnDuplicate": {
+    "message": "复制"
+  },
+  "btnDelete": {
+    "message": "删除"
+  },
+  "moveUp": {
+    "message": "上移"
+  },
+  "moveDown": {
+    "message": "下移"
+  },
+  "unnamed": {
+    "message": "（未命名）"
+  },
+  "copySuffix": {
+    "message": "副本"
+  },
+  "toastSaved": {
+    "message": "已保存"
+  },
+  "toastDuplicated": {
+    "message": "已复制"
+  },
+  "toastDeleted": {
+    "message": "已删除"
+  },
+  "toastExported": {
+    "message": "已导出 $count$ 个配置",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "已导入 $count$ 个配置",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "删除配置“$name$”？",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "无效的配置文件"
+  },
+  "errNameRequired": {
+    "message": "名称为必填项"
+  },
+  "errUaRequired": {
+    "message": "User-Agent 为必填项"
+  },
+  "errUaControl": {
+    "message": "User-Agent 包含控制字符"
+  },
+  "errDepth": {
+    "message": "伪装深度必须为“仅请求头”或“完整”"
+  },
+  "errIncludeType": {
+    "message": "包含 URL 必须是文本行列表"
+  },
+  "errExcludeType": {
+    "message": "排除 URL 必须是文本行列表"
+  },
+  "errBadJson": {
+    "message": "无法识别的文件（非有效 JSON）"
+  },
+  "errUnrecognized": {
+    "message": "无法识别的文件"
+  },
+  "errNewerVersion": {
+    "message": "此文件来自更高版本的 UA Intercept"
+  },
+  "errNoProfiles": {
+    "message": "此文件中未找到配置文件"
+  },
+  "errProfileInvalid": {
+    "message": "配置文件 $index$ 无效：$reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "检查 GitHub 更新"
+  },
+  "checkUpdatesHint": {
+    "message": "默认关闭。开启后，每天向 GitHub 公共 API 查询一次最新版本。不会发送任何数据。"
+  },
+  "updateAvailable": {
+    "message": "有可用更新：v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "查看版本"
+  },
+  "updateDismiss": {
+    "message": "忽略"
+  }
+}

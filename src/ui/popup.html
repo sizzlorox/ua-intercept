@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UA Intercept</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #ffffff;
+        --fg: #1a1a1a;
+        --muted: #6b7280;
+        --border: #e5e7eb;
+        --accent: #2ea9af;
+        --card: #f6fafa;
+        --focus: #1d6fa5;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1f2124;
+          --fg: #e8eaed;
+          --muted: #9aa0a6;
+          --border: #3c4043;
+          --card: #26292d;
+          --focus: #8ab4f8;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        width: 300px;
+        margin: 0;
+        padding: 12px;
+        font: 13px/1.4 system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--fg);
+      }
+      header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+      h1 { font-size: 14px; margin: 0; display: flex; gap: 6px; align-items: center; }
+      .switch { display: inline-flex; align-items: center; gap: 6px; }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--accent);
+        border-radius: 8px;
+        padding: 8px 10px;
+        margin-bottom: 8px;
+      }
+      .card.inactive { border-left-color: var(--muted); opacity: 0.7; }
+      .card .name { font-weight: 600; }
+      .card .meta { color: var(--muted); font-size: 12px; }
+      .badges { display: flex; gap: 10px; font-size: 12px; margin: 8px 0; }
+      .badge.on { color: var(--accent); }
+      .badge.off { color: var(--muted); }
+      fieldset { border: 0; margin: 0; padding: 0; }
+      legend { font-size: 12px; color: var(--muted); padding: 0 0 4px; }
+      .profiles { list-style: none; margin: 0 0 8px; padding: 0; max-height: 180px; overflow-y: auto; }
+      .profiles li { margin: 0; }
+      .profiles label {
+        display: flex; align-items: center; gap: 8px; padding: 6px 8px;
+        border-radius: 6px; cursor: pointer;
+      }
+      .profiles label:hover { background: var(--card); }
+      .actions { display: flex; gap: 8px; margin-top: 8px; }
+      button, .linkbtn {
+        font: inherit; cursor: pointer; border-radius: 6px;
+        border: 1px solid var(--border); background: transparent; color: var(--fg);
+        padding: 6px 10px;
+      }
+      button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+      .empty { color: var(--muted); padding: 8px 0; }
+      .update {
+        display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+        background: var(--accent); color: #fff; border-radius: 8px;
+        padding: 8px 10px; margin-bottom: 10px; font-size: 12px;
+      }
+      .update a { color: #fff; font-weight: 600; }
+      .update .spacer { flex: 1; }
+      .update button { background: rgba(255,255,255,.2); border: 0; color: #fff; border-radius: 4px; padding: 2px 8px; }
+      :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+      details > summary { cursor: pointer; color: var(--muted); margin-bottom: 6px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>🎭 UA Intercept</h1>
+      <label class="switch">
+        <input type="checkbox" id="master" />
+        <span id="master-label">Off</span>
+      </label>
+    </header>
+
+    <div id="update-banner"></div>
+    <div id="status" aria-live="polite"></div>
+
+    <div class="actions">
+      <button id="new-btn">+ <span data-i18n="btnNew">New</span></button>
+      <button id="manage-btn">⚙ <span data-i18n="btnManage">Manage</span></button>
+    </div>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "User-Agent 切換器，支援匯入／匯出設定檔並可選擇偽裝深度（僅標頭或完整）。"
+  },
+  "on": {
+    "message": "開啟"
+  },
+  "off": {
+    "message": "關閉"
+  },
+  "activeProfile": {
+    "message": "使用中設定檔"
+  },
+  "noActiveProfile": {
+    "message": "無使用中設定檔"
+  },
+  "noProfilesYet": {
+    "message": "尚無設定檔。點選「新增」以建立一個。"
+  },
+  "depthFullShort": {
+    "message": "完整偽裝"
+  },
+  "depthHeadersShort": {
+    "message": "僅標頭"
+  },
+  "mobile": {
+    "message": "行動裝置"
+  },
+  "badgeHeader": {
+    "message": "標頭"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "真實"
+  },
+  "btnNew": {
+    "message": "新增"
+  },
+  "btnManage": {
+    "message": "管理"
+  },
+  "btnImport": {
+    "message": "匯入"
+  },
+  "btnExport": {
+    "message": "匯出"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — 設定檔"
+  },
+  "profiles": {
+    "message": "設定檔"
+  },
+  "placeholderSelect": {
+    "message": "請選擇設定檔，或建立新的設定檔。"
+  },
+  "editHeading": {
+    "message": "編輯設定檔"
+  },
+  "fieldPreset": {
+    "message": "從預設集開始"
+  },
+  "presetCustom": {
+    "message": "自訂…"
+  },
+  "fieldName": {
+    "message": "名稱"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform（完整深度）"
+  },
+  "fieldMobile": {
+    "message": "行動裝置"
+  },
+  "depthLegend": {
+    "message": "偽裝深度"
+  },
+  "depthFull": {
+    "message": "完整 — 同時改寫頁面中的 navigator.*"
+  },
+  "depthHeaders": {
+    "message": "僅標頭"
+  },
+  "depthNote": {
+    "message": "完整偽裝不涵蓋 Web Workers（已知限制）。"
+  },
+  "fieldInclude": {
+    "message": "包含的 URL（每行一個；留空 = 所有網站）。以網域為範圍。"
+  },
+  "fieldExclude": {
+    "message": "排除的 URL（每行一個）"
+  },
+  "btnSave": {
+    "message": "儲存"
+  },
+  "btnDuplicate": {
+    "message": "複製"
+  },
+  "btnDelete": {
+    "message": "刪除"
+  },
+  "moveUp": {
+    "message": "上移"
+  },
+  "moveDown": {
+    "message": "下移"
+  },
+  "unnamed": {
+    "message": "（未命名）"
+  },
+  "copySuffix": {
+    "message": "複本"
+  },
+  "toastSaved": {
+    "message": "已儲存"
+  },
+  "toastDuplicated": {
+    "message": "已複製"
+  },
+  "toastDeleted": {
+    "message": "已刪除"
+  },
+  "toastExported": {
+    "message": "已匯出 $count$ 個設定檔",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "已匯入 $count$ 個設定檔",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "要刪除設定檔「$name$」嗎？",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "設定檔無效"
+  },
+  "errNameRequired": {
+    "message": "必須填寫名稱"
+  },
+  "errUaRequired": {
+    "message": "必須填寫 User-Agent"
+  },
+  "errUaControl": {
+    "message": "User-Agent 含有控制字元"
+  },
+  "errDepth": {
+    "message": "偽裝深度必須為「標頭」或「完整」"
+  },
+  "errIncludeType": {
+    "message": "納入的網址必須是多行文字清單"
+  },
+  "errExcludeType": {
+    "message": "排除的網址必須是多行文字清單"
+  },
+  "errBadJson": {
+    "message": "無法辨識的檔案（不是有效的 JSON）"
+  },
+  "errUnrecognized": {
+    "message": "無法辨識的檔案"
+  },
+  "errNewerVersion": {
+    "message": "此檔案來自較新版本的 UA Intercept"
+  },
+  "errNoProfiles": {
+    "message": "此檔案中找不到任何設定檔"
+  },
+  "errProfileInvalid": {
+    "message": "設定檔 $index$ 無效：$reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "檢查 GitHub 更新"
+  },
+  "checkUpdatesHint": {
+    "message": "預設關閉。開啟後，每天會向 GitHub 的公開 API 查詢一次最新版本。不會傳送任何資料。"
+  },
+  "updateAvailable": {
+    "message": "有可用更新：v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "查看版本"
+  },
+  "updateDismiss": {
+    "message": "關閉"
+  }
+}

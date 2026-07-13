@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UA Intercept — Profiles</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #ffffff; --fg: #1a1a1a; --muted: #6b7280; --border: #e5e7eb;
+        --accent: #2ea9af; --card: #f6fafa; --focus: #1d6fa5; --danger: #c0392b;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1f2124; --fg: #e8eaed; --muted: #9aa0a6; --border: #3c4043;
+          --card: #26292d; --focus: #8ab4f8; --danger: #f28b82;
+        }
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font: 14px/1.5 system-ui, sans-serif; background: var(--bg); color: var(--fg); }
+      header {
+        display: flex; align-items: center; justify-content: space-between;
+        gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap;
+      }
+      h1 { font-size: 18px; margin: 0; }
+      .toolbar { display: flex; gap: 8px; }
+      main { display: grid; grid-template-columns: 260px 1fr; gap: 0; min-height: calc(100vh - 60px); }
+      .list-pane { border-right: 1px solid var(--border); padding: 12px; }
+      .edit-pane { padding: 16px 20px; max-width: 640px; }
+      ul.profiles { list-style: none; margin: 0 0 12px; padding: 0; }
+      ul.profiles li {
+        display: flex; align-items: center; gap: 6px; padding: 6px 8px;
+        border-radius: 6px; cursor: pointer;
+      }
+      ul.profiles li.active { background: var(--card); font-weight: 600; }
+      ul.profiles li .dot { color: var(--accent); width: 12px; }
+      ul.profiles li .pname { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      ul.profiles li .ord { display: flex; flex-direction: column; }
+      label.field { display: block; margin-bottom: 12px; }
+      label.field > span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 3px; }
+      input[type='text'], textarea, select {
+        width: 100%; font: inherit; padding: 6px 8px; border: 1px solid var(--border);
+        border-radius: 6px; background: var(--bg); color: var(--fg);
+      }
+      textarea { resize: vertical; }
+      .row { display: flex; gap: 16px; flex-wrap: wrap; }
+      .row > label.field { flex: 1; min-width: 140px; }
+      fieldset { border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin: 0 0 12px; }
+      legend { font-size: 12px; color: var(--muted); padding: 0 4px; }
+      .depth-note { font-size: 12px; color: var(--muted); margin-top: 4px; }
+      .form-actions { display: flex; gap: 8px; margin-top: 16px; }
+      button {
+        font: inherit; cursor: pointer; border-radius: 6px; border: 1px solid var(--border);
+        background: transparent; color: var(--fg); padding: 6px 12px;
+      }
+      button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+      button.danger { color: var(--danger); border-color: var(--danger); }
+      button.icon { padding: 0 6px; line-height: 1.2; }
+      .placeholder { color: var(--muted); padding: 40px 0; text-align: center; }
+      .settings { border-top: 1px solid var(--border); margin-top: 12px; padding-top: 12px; }
+      .settings label { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+      .settings .hint { color: var(--muted); font-size: 12px; margin: 4px 0 0; }
+      #toast {
+        position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+        background: var(--fg); color: var(--bg); padding: 8px 14px; border-radius: 6px;
+        opacity: 0; transition: opacity .2s; pointer-events: none;
+      }
+      #toast.show { opacity: 1; }
+      #toast.error { background: var(--danger); color: #fff; }
+      :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+      input:invalid { border-color: var(--danger); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 data-i18n="optionsHeading">UA Intercept — Profiles</h1>
+      <div class="toolbar">
+        <button id="import-btn" data-i18n="btnImport">Import</button>
+        <button id="export-btn" data-i18n="btnExport">Export</button>
+        <button id="new-btn" class="primary">+ <span data-i18n="btnNew">New</span></button>
+        <input type="file" id="import-file" accept="application/json,.json" hidden />
+      </div>
+    </header>
+
+    <main>
+      <nav class="list-pane" data-i18n-title="profiles" aria-label="Profiles">
+        <ul class="profiles" id="profile-list"></ul>
+        <div class="settings">
+          <label>
+            <input type="checkbox" id="check-updates" />
+            <span data-i18n="checkUpdates">Check GitHub for updates</span>
+          </label>
+          <p class="hint" data-i18n="checkUpdatesHint">Off by default.</p>
+        </div>
+      </nav>
+
+      <section class="edit-pane" id="edit-pane" data-i18n-title="editHeading" aria-label="Edit profile">
+        <p class="placeholder" id="placeholder" data-i18n="placeholderSelect">Select a profile, or create a new one.</p>
+      </section>
+    </main>
+
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <template id="edit-template">
+      <form id="edit-form" novalidate>
+        <label class="field">
+          <span data-i18n="fieldPreset">Start from preset</span>
+          <select id="f-preset"></select>
+        </label>
+        <label class="field">
+          <span data-i18n="fieldName">Name</span>
+          <input type="text" id="f-name" required autocomplete="off" />
+        </label>
+        <label class="field">
+          <span data-i18n="fieldUA">User-Agent</span>
+          <textarea id="f-ua" rows="3" required></textarea>
+        </label>
+        <div class="row">
+          <label class="field">
+            <span data-i18n="fieldPlatform">navigator.platform (full depth)</span>
+            <input type="text" id="f-platform" autocomplete="off" />
+          </label>
+          <label class="field" style="flex: 0 0 auto; align-self: end;">
+            <input type="checkbox" id="f-mobile" /> <span data-i18n="fieldMobile">Mobile</span>
+          </label>
+        </div>
+
+        <fieldset>
+          <legend data-i18n="depthLegend">Spoof depth</legend>
+          <label><input type="radio" name="depth" id="f-depth-full" value="full" /> <span data-i18n="depthFull">Full — also rewrites navigator.* in the page</span></label><br />
+          <label><input type="radio" name="depth" id="f-depth-headers" value="headers" /> <span data-i18n="depthHeaders">Headers only</span></label>
+          <p class="depth-note" data-i18n="depthNote">Full spoof does not cover Web Workers (a known limitation).</p>
+        </fieldset>
+
+        <label class="field">
+          <span data-i18n="fieldInclude">Include URLs (one per line; empty = all sites). Domain-scoped.</span>
+          <textarea id="f-include" rows="2" placeholder="example.com&#10;*://*.test.dev/*"></textarea>
+        </label>
+        <label class="field">
+          <span data-i18n="fieldExclude">Exclude URLs (one per line)</span>
+          <textarea id="f-exclude" rows="2"></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="primary" data-i18n="btnSave">Save</button>
+          <button type="button" id="f-duplicate" data-i18n="btnDuplicate">Duplicate</button>
+          <button type="button" id="f-delete" class="danger" data-i18n="btnDelete">Delete</button>
+        </div>
+      </form>
+    </template>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>

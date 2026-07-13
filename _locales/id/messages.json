@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "Pengalih User-Agent dengan impor/ekspor profil dan kedalaman pemalsuan yang dapat dipilih (hanya headers atau full)."
+  },
+  "on": {
+    "message": "Aktif"
+  },
+  "off": {
+    "message": "Nonaktif"
+  },
+  "activeProfile": {
+    "message": "Profil aktif"
+  },
+  "noActiveProfile": {
+    "message": "Tidak ada profil aktif"
+  },
+  "noProfilesYet": {
+    "message": "Belum ada profil. Klik “Baru” untuk membuatnya."
+  },
+  "depthFullShort": {
+    "message": "pemalsuan penuh"
+  },
+  "depthHeadersShort": {
+    "message": "hanya header"
+  },
+  "mobile": {
+    "message": "seluler"
+  },
+  "badgeHeader": {
+    "message": "header"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "asli"
+  },
+  "btnNew": {
+    "message": "Baru"
+  },
+  "btnManage": {
+    "message": "Kelola"
+  },
+  "btnImport": {
+    "message": "Impor"
+  },
+  "btnExport": {
+    "message": "Ekspor"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — Profil"
+  },
+  "profiles": {
+    "message": "Profil"
+  },
+  "placeholderSelect": {
+    "message": "Pilih profil, atau buat yang baru."
+  },
+  "editHeading": {
+    "message": "Edit profil"
+  },
+  "fieldPreset": {
+    "message": "Mulai dari preset"
+  },
+  "presetCustom": {
+    "message": "Kustom…"
+  },
+  "fieldName": {
+    "message": "Nama"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (tingkat penuh)"
+  },
+  "fieldMobile": {
+    "message": "Seluler"
+  },
+  "depthLegend": {
+    "message": "Tingkat pemalsuan"
+  },
+  "depthFull": {
+    "message": "Penuh — juga menulis ulang navigator.* di halaman"
+  },
+  "depthHeaders": {
+    "message": "Hanya header"
+  },
+  "depthNote": {
+    "message": "Pemalsuan penuh tidak mencakup Web Workers (keterbatasan yang diketahui)."
+  },
+  "fieldInclude": {
+    "message": "Sertakan URL (satu per baris; kosong = semua situs). Dibatasi domain."
+  },
+  "fieldExclude": {
+    "message": "Kecualikan URL (satu per baris)"
+  },
+  "btnSave": {
+    "message": "Simpan"
+  },
+  "btnDuplicate": {
+    "message": "Duplikat"
+  },
+  "btnDelete": {
+    "message": "Hapus"
+  },
+  "moveUp": {
+    "message": "Pindah ke atas"
+  },
+  "moveDown": {
+    "message": "Pindah ke bawah"
+  },
+  "unnamed": {
+    "message": "(tanpa nama)"
+  },
+  "copySuffix": {
+    "message": "salinan"
+  },
+  "toastSaved": {
+    "message": "Tersimpan"
+  },
+  "toastDuplicated": {
+    "message": "Diduplikat"
+  },
+  "toastDeleted": {
+    "message": "Dihapus"
+  },
+  "toastExported": {
+    "message": "$count$ profil diekspor",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "$count$ profil diimpor",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "Hapus profil “$name$”?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "Profil tidak valid"
+  },
+  "errNameRequired": {
+    "message": "Nama wajib diisi"
+  },
+  "errUaRequired": {
+    "message": "User-Agent wajib diisi"
+  },
+  "errUaControl": {
+    "message": "User-Agent mengandung karakter kontrol"
+  },
+  "errDepth": {
+    "message": "Kedalaman pemalsuan harus “headers” atau “full”"
+  },
+  "errIncludeType": {
+    "message": "Sertakan URL harus berupa daftar baris teks"
+  },
+  "errExcludeType": {
+    "message": "Kecualikan URL harus berupa daftar baris teks"
+  },
+  "errBadJson": {
+    "message": "File tidak dikenali (JSON tidak valid)"
+  },
+  "errUnrecognized": {
+    "message": "File tidak dikenali"
+  },
+  "errNewerVersion": {
+    "message": "File ini berasal dari UA Intercept versi yang lebih baru"
+  },
+  "errNoProfiles": {
+    "message": "Tidak ada profil ditemukan dalam file ini"
+  },
+  "errProfileInvalid": {
+    "message": "Profil $index$ tidak valid: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "Periksa pembaruan di GitHub"
+  },
+  "checkUpdatesHint": {
+    "message": "Nonaktif secara bawaan. Saat aktif, memeriksa rilis terbaru lewat API publik GitHub sekali sehari. Tidak ada data yang dikirim."
+  },
+  "updateAvailable": {
+    "message": "Pembaruan tersedia: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "Lihat rilis"
+  },
+  "updateDismiss": {
+    "message": "Tutup"
+  }
+}

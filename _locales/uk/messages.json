@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "Перемикач User-Agent з імпортом/експортом профілів і вибором глибини підміни (лише заголовки або повна)."
+  },
+  "on": {
+    "message": "Увімк."
+  },
+  "off": {
+    "message": "Вимк."
+  },
+  "activeProfile": {
+    "message": "Активний профіль"
+  },
+  "noActiveProfile": {
+    "message": "Немає активного профілю"
+  },
+  "noProfilesYet": {
+    "message": "Профілів ще немає. Натисніть «Новий», щоб створити."
+  },
+  "depthFullShort": {
+    "message": "повна підміна"
+  },
+  "depthHeadersShort": {
+    "message": "лише заголовки"
+  },
+  "mobile": {
+    "message": "мобільний"
+  },
+  "badgeHeader": {
+    "message": "заголовок"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "справжній"
+  },
+  "btnNew": {
+    "message": "Новий"
+  },
+  "btnManage": {
+    "message": "Керувати"
+  },
+  "btnImport": {
+    "message": "Імпорт"
+  },
+  "btnExport": {
+    "message": "Експорт"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — Профілі"
+  },
+  "profiles": {
+    "message": "Профілі"
+  },
+  "placeholderSelect": {
+    "message": "Виберіть профіль або створіть новий."
+  },
+  "editHeading": {
+    "message": "Редагувати профіль"
+  },
+  "fieldPreset": {
+    "message": "Почати з шаблону"
+  },
+  "presetCustom": {
+    "message": "Власний…"
+  },
+  "fieldName": {
+    "message": "Назва"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (повна глибина)"
+  },
+  "fieldMobile": {
+    "message": "Мобільний"
+  },
+  "depthLegend": {
+    "message": "Глибина підміни"
+  },
+  "depthFull": {
+    "message": "Повна — також переписує navigator.* на сторінці"
+  },
+  "depthHeaders": {
+    "message": "Лише заголовки"
+  },
+  "depthNote": {
+    "message": "Повна підміна не охоплює Web Workers (відоме обмеження)."
+  },
+  "fieldInclude": {
+    "message": "Включені URL-адреси (по одній на рядок; порожньо = усі сайти). Обмеження за доменом."
+  },
+  "fieldExclude": {
+    "message": "Виключені URL-адреси (по одній на рядок)"
+  },
+  "btnSave": {
+    "message": "Зберегти"
+  },
+  "btnDuplicate": {
+    "message": "Дублювати"
+  },
+  "btnDelete": {
+    "message": "Видалити"
+  },
+  "moveUp": {
+    "message": "Перемістити вгору"
+  },
+  "moveDown": {
+    "message": "Перемістити вниз"
+  },
+  "unnamed": {
+    "message": "(без назви)"
+  },
+  "copySuffix": {
+    "message": "копія"
+  },
+  "toastSaved": {
+    "message": "Збережено"
+  },
+  "toastDuplicated": {
+    "message": "Продубльовано"
+  },
+  "toastDeleted": {
+    "message": "Видалено"
+  },
+  "toastExported": {
+    "message": "Експортовано профілів: $count$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "Імпортовано профілів: $count$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "Видалити профіль “$name$”?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "Недійсний профіль"
+  },
+  "errNameRequired": {
+    "message": "Потрібна назва"
+  },
+  "errUaRequired": {
+    "message": "Потрібен User-Agent"
+  },
+  "errUaControl": {
+    "message": "User-Agent містить керуючі символи"
+  },
+  "errDepth": {
+    "message": "Глибина підміни має бути “заголовки” або “повна”"
+  },
+  "errIncludeType": {
+    "message": "Включені URL мають бути списком текстових рядків"
+  },
+  "errExcludeType": {
+    "message": "Виключені URL мають бути списком текстових рядків"
+  },
+  "errBadJson": {
+    "message": "Файл не розпізнано (недійсний JSON)"
+  },
+  "errUnrecognized": {
+    "message": "Файл не розпізнано"
+  },
+  "errNewerVersion": {
+    "message": "Цей файл створено новішою версією UA Intercept"
+  },
+  "errNoProfiles": {
+    "message": "У цьому файлі не знайдено профілів"
+  },
+  "errProfileInvalid": {
+    "message": "Профіль $index$ недійсний: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "Перевіряти оновлення на GitHub"
+  },
+  "checkUpdatesHint": {
+    "message": "Вимкнено за замовчуванням. Якщо ввімкнено, раз на день запитує публічний API GitHub про останній випуск. Жодні дані не надсилаються."
+  },
+  "updateAvailable": {
+    "message": "Доступне оновлення: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "Переглянути випуск"
+  },
+  "updateDismiss": {
+    "message": "Відхилити"
+  }
+}

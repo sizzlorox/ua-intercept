@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "User-Agent-Switcher mit Import/Export-Profilen und wählbarer Spoofing-Tiefe (nur Header oder vollständig)."
+  },
+  "on": {
+    "message": "An"
+  },
+  "off": {
+    "message": "Aus"
+  },
+  "activeProfile": {
+    "message": "Aktives Profil"
+  },
+  "noActiveProfile": {
+    "message": "Kein aktives Profil"
+  },
+  "noProfilesYet": {
+    "message": "Noch keine Profile. Klicke auf „Neu“, um eines zu erstellen."
+  },
+  "depthFullShort": {
+    "message": "vollständiges Spoofing"
+  },
+  "depthHeadersShort": {
+    "message": "nur Header"
+  },
+  "mobile": {
+    "message": "mobil"
+  },
+  "badgeHeader": {
+    "message": "Header"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "echt"
+  },
+  "btnNew": {
+    "message": "Neu"
+  },
+  "btnManage": {
+    "message": "Verwalten"
+  },
+  "btnImport": {
+    "message": "Importieren"
+  },
+  "btnExport": {
+    "message": "Exportieren"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — Profile"
+  },
+  "profiles": {
+    "message": "Profile"
+  },
+  "placeholderSelect": {
+    "message": "Wähle ein Profil oder erstelle ein neues."
+  },
+  "editHeading": {
+    "message": "Profil bearbeiten"
+  },
+  "fieldPreset": {
+    "message": "Von Vorlage starten"
+  },
+  "presetCustom": {
+    "message": "Benutzerdefiniert…"
+  },
+  "fieldName": {
+    "message": "Name"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (volle Tiefe)"
+  },
+  "fieldMobile": {
+    "message": "Mobil"
+  },
+  "depthLegend": {
+    "message": "Spoofing-Tiefe"
+  },
+  "depthFull": {
+    "message": "Vollständig — überschreibt auch navigator.* auf der Seite"
+  },
+  "depthHeaders": {
+    "message": "Nur Header"
+  },
+  "depthNote": {
+    "message": "Vollständiges Spoofing deckt keine Web Workers ab (eine bekannte Einschränkung)."
+  },
+  "fieldInclude": {
+    "message": "URLs einschließen (eine pro Zeile; leer = alle Seiten). Domain-begrenzt."
+  },
+  "fieldExclude": {
+    "message": "URLs ausschließen (eine pro Zeile)"
+  },
+  "btnSave": {
+    "message": "Speichern"
+  },
+  "btnDuplicate": {
+    "message": "Duplizieren"
+  },
+  "btnDelete": {
+    "message": "Löschen"
+  },
+  "moveUp": {
+    "message": "Nach oben"
+  },
+  "moveDown": {
+    "message": "Nach unten"
+  },
+  "unnamed": {
+    "message": "(unbenannt)"
+  },
+  "copySuffix": {
+    "message": "Kopie"
+  },
+  "toastSaved": {
+    "message": "Gespeichert"
+  },
+  "toastDuplicated": {
+    "message": "Dupliziert"
+  },
+  "toastDeleted": {
+    "message": "Gelöscht"
+  },
+  "toastExported": {
+    "message": "$count$ Profil(e) exportiert",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "$count$ Profil(e) importiert",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "Profil „$name$“ löschen?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "Ungültiges Profil"
+  },
+  "errNameRequired": {
+    "message": "Name ist erforderlich"
+  },
+  "errUaRequired": {
+    "message": "User-Agent ist erforderlich"
+  },
+  "errUaControl": {
+    "message": "User-Agent enthält Steuerzeichen"
+  },
+  "errDepth": {
+    "message": "Spoofing-Tiefe muss „headers“ oder „full“ sein"
+  },
+  "errIncludeType": {
+    "message": "Eingeschlossene URLs müssen eine Liste von Textzeilen sein"
+  },
+  "errExcludeType": {
+    "message": "Ausgeschlossene URLs müssen eine Liste von Textzeilen sein"
+  },
+  "errBadJson": {
+    "message": "Datei nicht erkannt (kein gültiges JSON)"
+  },
+  "errUnrecognized": {
+    "message": "Datei nicht erkannt"
+  },
+  "errNewerVersion": {
+    "message": "Diese Datei stammt aus einer neueren Version von UA Intercept"
+  },
+  "errNoProfiles": {
+    "message": "Keine Profile in dieser Datei gefunden"
+  },
+  "errProfileInvalid": {
+    "message": "Profil $index$ ist ungültig: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "Auf GitHub nach Updates suchen"
+  },
+  "checkUpdatesHint": {
+    "message": "Standardmäßig aus. Wenn aktiviert, wird einmal täglich GitHubs öffentliche API nach der neuesten Version abgefragt. Es werden keine Daten gesendet."
+  },
+  "updateAvailable": {
+    "message": "Update verfügbar: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "Release anzeigen"
+  },
+  "updateDismiss": {
+    "message": "Verwerfen"
+  }
+}

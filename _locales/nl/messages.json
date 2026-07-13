@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "User-Agent-switcher met import/export-profielen en instelbare spoofdiepte (alleen headers of volledig)."
+  },
+  "on": {
+    "message": "Aan"
+  },
+  "off": {
+    "message": "Uit"
+  },
+  "activeProfile": {
+    "message": "Actief profiel"
+  },
+  "noActiveProfile": {
+    "message": "Geen actief profiel"
+  },
+  "noProfilesYet": {
+    "message": "Nog geen profielen. Klik op “Nieuw” om er een te maken."
+  },
+  "depthFullShort": {
+    "message": "volledige spoof"
+  },
+  "depthHeadersShort": {
+    "message": "alleen headers"
+  },
+  "mobile": {
+    "message": "mobiel"
+  },
+  "badgeHeader": {
+    "message": "header"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "echt"
+  },
+  "btnNew": {
+    "message": "Nieuw"
+  },
+  "btnManage": {
+    "message": "Beheren"
+  },
+  "btnImport": {
+    "message": "Importeren"
+  },
+  "btnExport": {
+    "message": "Exporteren"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — Profielen"
+  },
+  "profiles": {
+    "message": "Profielen"
+  },
+  "placeholderSelect": {
+    "message": "Selecteer een profiel of maak een nieuw profiel aan."
+  },
+  "editHeading": {
+    "message": "Profiel bewerken"
+  },
+  "fieldPreset": {
+    "message": "Beginnen vanaf voorinstelling"
+  },
+  "presetCustom": {
+    "message": "Aangepast…"
+  },
+  "fieldName": {
+    "message": "Naam"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (volledige diepte)"
+  },
+  "fieldMobile": {
+    "message": "Mobiel"
+  },
+  "depthLegend": {
+    "message": "Spoofdiepte"
+  },
+  "depthFull": {
+    "message": "Volledig — herschrijft ook navigator.* in de pagina"
+  },
+  "depthHeaders": {
+    "message": "Alleen headers"
+  },
+  "depthNote": {
+    "message": "Volledige spoof geldt niet voor Web Workers (een bekende beperking)."
+  },
+  "fieldInclude": {
+    "message": "URL's opnemen (één per regel; leeg = alle sites). Domeingebonden."
+  },
+  "fieldExclude": {
+    "message": "URL's uitsluiten (één per regel)"
+  },
+  "btnSave": {
+    "message": "Opslaan"
+  },
+  "btnDuplicate": {
+    "message": "Dupliceren"
+  },
+  "btnDelete": {
+    "message": "Verwijderen"
+  },
+  "moveUp": {
+    "message": "Omhoog verplaatsen"
+  },
+  "moveDown": {
+    "message": "Omlaag verplaatsen"
+  },
+  "unnamed": {
+    "message": "(naamloos)"
+  },
+  "copySuffix": {
+    "message": "kopie"
+  },
+  "toastSaved": {
+    "message": "Opgeslagen"
+  },
+  "toastDuplicated": {
+    "message": "Gedupliceerd"
+  },
+  "toastDeleted": {
+    "message": "Verwijderd"
+  },
+  "toastExported": {
+    "message": "$count$ profiel(en) geëxporteerd",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "$count$ profiel(en) geïmporteerd",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "Profiel “$name$” verwijderen?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "Ongeldig profiel"
+  },
+  "errNameRequired": {
+    "message": "Naam is vereist"
+  },
+  "errUaRequired": {
+    "message": "User-Agent is vereist"
+  },
+  "errUaControl": {
+    "message": "User-Agent bevat stuurtekens"
+  },
+  "errDepth": {
+    "message": "Spoofdiepte moet “headers” of “full” zijn"
+  },
+  "errIncludeType": {
+    "message": "Opgenomen URLs moeten een lijst met tekstregels zijn"
+  },
+  "errExcludeType": {
+    "message": "Uitgesloten URLs moeten een lijst met tekstregels zijn"
+  },
+  "errBadJson": {
+    "message": "Niet-herkend bestand (geen geldige JSON)"
+  },
+  "errUnrecognized": {
+    "message": "Niet-herkend bestand"
+  },
+  "errNewerVersion": {
+    "message": "Dit bestand is van een nieuwere versie van UA Intercept"
+  },
+  "errNoProfiles": {
+    "message": "Geen profielen gevonden in dit bestand"
+  },
+  "errProfileInvalid": {
+    "message": "Profiel $index$ is ongeldig: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "Controleer GitHub op updates"
+  },
+  "checkUpdatesHint": {
+    "message": "Standaard uit. Indien aan, vraagt eenmaal per dag de nieuwste release op via de publieke API van GitHub. Er worden geen gegevens verzonden."
+  },
+  "updateAvailable": {
+    "message": "Update beschikbaar: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "Release bekijken"
+  },
+  "updateDismiss": {
+    "message": "Negeren"
+  }
+}

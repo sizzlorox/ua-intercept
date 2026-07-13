@@ -1,0 +1,47 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+# Least privilege at the top; the job that needs it opts up.
+permissions:
+  contents: read
+
+jobs:
+  package:
+    name: Package & release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the GitHub release + upload the zip
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm test
+      - run: node scripts/validate.mjs
+
+      - name: Build Chrome + Firefox packages
+        run: |
+          npm run build
+          (cd dist/chrome && zip -qr "../../ua-intercept-chrome-${GITHUB_REF_NAME}.zip" . -x "*/.*")
+          (cd dist/firefox && zip -qr "../../ua-intercept-firefox-${GITHUB_REF_NAME}.zip" . -x "*/.*")
+
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        with:
+          files: ua-intercept-*.zip
+          generate_release_notes: true
+          body: |
+            Two builds are attached — upload the matching zip to each store:
+            - `ua-intercept-chrome-*.zip` → Chrome Web Store (also works on Edge/Brave/Opera/Vivaldi/Arc)
+            - `ua-intercept-firefox-*.zip` → Firefox Add-ons (AMO)
+
+            See the [CHANGELOG](https://github.com/sizzlorox/ua-intercept/blob/main/CHANGELOG.md).

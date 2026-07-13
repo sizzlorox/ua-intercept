@@ -1,0 +1,219 @@
+{
+  "extName": {
+    "message": "UA Intercept"
+  },
+  "extDescription": {
+    "message": "Przełącznik User-Agent z importem/eksportem profili i wyborem głębi podszywania (tylko headers lub full)."
+  },
+  "on": {
+    "message": "Wł."
+  },
+  "off": {
+    "message": "Wył."
+  },
+  "activeProfile": {
+    "message": "Aktywny profil"
+  },
+  "noActiveProfile": {
+    "message": "Brak aktywnego profilu"
+  },
+  "noProfilesYet": {
+    "message": "Brak profili. Kliknij “Nowy”, aby utworzyć."
+  },
+  "depthFullShort": {
+    "message": "pełna podmiana"
+  },
+  "depthHeadersShort": {
+    "message": "tylko nagłówki"
+  },
+  "mobile": {
+    "message": "mobilny"
+  },
+  "badgeHeader": {
+    "message": "nagłówek"
+  },
+  "badgeNavigator": {
+    "message": "navigator.ua"
+  },
+  "badgeReal": {
+    "message": "rzeczywisty"
+  },
+  "btnNew": {
+    "message": "Nowy"
+  },
+  "btnManage": {
+    "message": "Zarządzaj"
+  },
+  "btnImport": {
+    "message": "Importuj"
+  },
+  "btnExport": {
+    "message": "Eksportuj"
+  },
+  "optionsHeading": {
+    "message": "UA Intercept — Profile"
+  },
+  "profiles": {
+    "message": "Profile"
+  },
+  "placeholderSelect": {
+    "message": "Wybierz profil lub utwórz nowy."
+  },
+  "editHeading": {
+    "message": "Edytuj profil"
+  },
+  "fieldPreset": {
+    "message": "Zacznij od szablonu"
+  },
+  "presetCustom": {
+    "message": "Niestandardowy…"
+  },
+  "fieldName": {
+    "message": "Nazwa"
+  },
+  "fieldUA": {
+    "message": "User-Agent"
+  },
+  "fieldPlatform": {
+    "message": "navigator.platform (pełna głębokość)"
+  },
+  "fieldMobile": {
+    "message": "Mobilny"
+  },
+  "depthLegend": {
+    "message": "Głębokość podmiany"
+  },
+  "depthFull": {
+    "message": "Pełna — przepisuje też navigator.* na stronie"
+  },
+  "depthHeaders": {
+    "message": "Tylko nagłówki"
+  },
+  "depthNote": {
+    "message": "Pełna podmiana nie obejmuje Web Workers (znane ograniczenie)."
+  },
+  "fieldInclude": {
+    "message": "Uwzględnij adresy URL (jeden na wiersz; puste = wszystkie witryny). Ograniczone do domeny."
+  },
+  "fieldExclude": {
+    "message": "Wyklucz adresy URL (jeden na wiersz)"
+  },
+  "btnSave": {
+    "message": "Zapisz"
+  },
+  "btnDuplicate": {
+    "message": "Duplikuj"
+  },
+  "btnDelete": {
+    "message": "Usuń"
+  },
+  "moveUp": {
+    "message": "Przenieś w górę"
+  },
+  "moveDown": {
+    "message": "Przenieś w dół"
+  },
+  "unnamed": {
+    "message": "(bez nazwy)"
+  },
+  "copySuffix": {
+    "message": "kopia"
+  },
+  "toastSaved": {
+    "message": "Zapisano"
+  },
+  "toastDuplicated": {
+    "message": "Zduplikowano"
+  },
+  "toastDeleted": {
+    "message": "Usunięto"
+  },
+  "toastExported": {
+    "message": "Wyeksportowano profile: $count$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "toastImported": {
+    "message": "Zaimportowano profile: $count$",
+    "placeholders": {
+      "count": {
+        "content": "$1"
+      }
+    }
+  },
+  "confirmDelete": {
+    "message": "Usunąć profil “$name$”?",
+    "placeholders": {
+      "name": {
+        "content": "$1"
+      }
+    }
+  },
+  "errNotObject": {
+    "message": "Nieprawidłowy profil"
+  },
+  "errNameRequired": {
+    "message": "Nazwa jest wymagana"
+  },
+  "errUaRequired": {
+    "message": "User-Agent jest wymagany"
+  },
+  "errUaControl": {
+    "message": "User-Agent zawiera znaki sterujące"
+  },
+  "errDepth": {
+    "message": "Głębokość podszywania musi wynosić „nagłówki” lub „pełna”"
+  },
+  "errIncludeType": {
+    "message": "Dołączone adresy URL muszą być listą wierszy tekstu"
+  },
+  "errExcludeType": {
+    "message": "Wykluczone adresy URL muszą być listą wierszy tekstu"
+  },
+  "errBadJson": {
+    "message": "Nierozpoznany plik (nieprawidłowy JSON)"
+  },
+  "errUnrecognized": {
+    "message": "Nierozpoznany plik"
+  },
+  "errNewerVersion": {
+    "message": "Ten plik pochodzi z nowszej wersji UA Intercept"
+  },
+  "errNoProfiles": {
+    "message": "Nie znaleziono profili w tym pliku"
+  },
+  "errProfileInvalid": {
+    "message": "Profil $index$ jest nieprawidłowy: $reason$",
+    "placeholders": {
+      "index": {
+        "content": "$1"
+      },
+      "reason": {
+        "content": "$2"
+      }
+    }
+  },
+  "checkUpdates": {
+    "message": "Sprawdź aktualizacje w GitHub"
+  },
+  "checkUpdatesHint": {
+    "message": "Domyślnie wyłączone. Po włączeniu raz dziennie pyta publiczne API GitHub o najnowsze wydanie. Żadne dane nie są wysyłane."
+  },
+  "updateAvailable": {
+    "message": "Dostępna aktualizacja: v$version$",
+    "placeholders": {
+      "version": {
+        "content": "$1"
+      }
+    }
+  },
+  "updateView": {
+    "message": "Zobacz wydanie"
+  },
+  "updateDismiss": {
+    "message": "Odrzuć"
+  }
+}
