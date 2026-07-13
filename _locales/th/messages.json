@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "ปิด"
+  },
+  "tokenHint": {
+    "message": "โทเคนที่เปิดใช้งานจะถูกต่อท้าย User-Agent จริงของคุณ (หรือแทนที่ในโหมด “replace”)"
+  },
+  "tokenAdd": {
+    "message": "+ โทเคน"
+  },
+  "tokenAppend": {
+    "message": "ต่อท้าย"
+  },
+  "tokenReplace": {
+    "message": "แทนที่"
+  },
+  "tokenEnabled": {
+    "message": "เปิดใช้งาน"
+  },
+  "tokenMode": {
+    "message": "โหมด"
+  },
+  "tokenValue": {
+    "message": "โทเคน User-Agent"
   }
 }

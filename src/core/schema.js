@@ -11,18 +11,25 @@ function err(code, params) {
   return { ok: false, error: params ? { code, params } : { code } }
 }
 
+export const TOKEN_MODES = ['append', 'set']
+
 /** @returns {{ok: true} | {ok: false, error: {code: string, params?: object}}} */
 export function validateProfile(p) {
   if (!p || typeof p !== 'object') return err('errNotObject')
   if (typeof p.name !== 'string' || p.name.trim() === '') return err('errNameRequired')
-  if (typeof p.userAgent !== 'string' || p.userAgent.trim() === '') return err('errUaRequired')
-  // Control chars in a header value make the whole DNR batch reject — forbid them.
-  if (CONTROL_CHARS.test(p.userAgent)) return err('errUaControl')
   if (!SPOOF_DEPTHS.includes(p.spoofDepth)) return err('errDepth')
   if (p.includeUrls != null && !isStringArray(p.includeUrls)) return err('errIncludeType')
   if (p.excludeUrls != null && !isStringArray(p.excludeUrls)) return err('errExcludeType')
-  // uaData strings become sec-ch-ua* header values; control chars there would
-  // reject the whole DNR batch on activation, same as a bad UA.
+  // Tokens hold the User-Agent value(s). Control chars in any of them make the
+  // whole DNR batch reject on activation, so forbid them.
+  if (p.tokens != null) {
+    if (!Array.isArray(p.tokens)) return err('errNotObject')
+    for (const tk of p.tokens) {
+      if (!tk || typeof tk.value !== 'string') return err('errNotObject')
+      if (CONTROL_CHARS.test(tk.value)) return err('errUaControl')
+    }
+  }
+  // uaData strings become sec-ch-ua* header values; same control-char hazard.
   if (uaDataHasControl(p.uaData)) return err('errUaControl')
   return { ok: true }
 }
@@ -50,7 +57,8 @@ function isStringArray(v) {
   return Array.isArray(v) && v.every((x) => typeof x === 'string')
 }
 
-/** Fill a partial profile with safe defaults and coerce loose (e.g. imported) fields. */
+/** Fill a partial profile with safe defaults and coerce loose (e.g. imported) fields.
+ * Migrates the legacy single `userAgent` string to a one-token `set` list. */
 export function normalizeProfile(p) {
   const merged = {
     spoofDepth: 'full',
@@ -58,6 +66,7 @@ export function normalizeProfile(p) {
     platform: '',
     mobile: false,
     uaData: null,
+    tokens: undefined,
     includeUrls: [],
     excludeUrls: [],
     color: '#2ea9af',
@@ -68,5 +77,24 @@ export function normalizeProfile(p) {
   merged.platform = typeof merged.platform === 'string' ? merged.platform : ''
   merged.includeUrls = isStringArray(merged.includeUrls) ? merged.includeUrls : []
   merged.excludeUrls = isStringArray(merged.excludeUrls) ? merged.excludeUrls : []
+  merged.tokens = normalizeTokens(merged.tokens, merged.userAgent)
+  delete merged.userAgent // superseded by tokens
   return merged
+}
+
+export function normalizeTokens(tokens, legacyUserAgent) {
+  if (!Array.isArray(tokens)) {
+    // migrate a legacy single userAgent -> one "set" token
+    if (typeof legacyUserAgent === 'string' && legacyUserAgent.trim()) {
+      return [{ value: legacyUserAgent, enabled: true, mode: 'set' }]
+    }
+    return []
+  }
+  return tokens
+    .filter((t) => t && typeof t.value === 'string')
+    .map((t) => ({
+      value: t.value,
+      enabled: t.enabled !== false,
+      mode: t.mode === 'set' ? 'set' : 'append',
+    }))
 }

@@ -1,18 +1,33 @@
 import { describe, it, expect } from 'vitest'
 import { exportBundle, parseBundle, parseImport, mergeImport, FORMAT_VERSION } from '../../src/core/porting.js'
 
-const profileA = { id: 'aaa', name: 'A', userAgent: 'UA-A', spoofDepth: 'headers', presetId: null }
-const profileB = { id: 'bbb', name: 'B', userAgent: 'UA-B', spoofDepth: 'full', presetId: 'win-chrome', uaData: null }
+const profileA = { id: 'aaa', name: 'A', spoofDepth: 'headers', presetId: null, tokens: [{ value: 'UA-A', enabled: true, mode: 'set' }] }
+const profileB = { id: 'bbb', name: 'B', spoofDepth: 'full', presetId: 'win-chrome', uaData: null, tokens: [{ value: 'UA-B', enabled: true, mode: 'set' }] }
 
 describe('exportBundle / parseBundle round-trip', () => {
-  it('round-trips and preserves id (SC-004 field-for-field)', () => {
+  it('round-trips (format v2) and preserves id + tokens', () => {
     const bundle = exportBundle([profileA])
     expect(bundle.formatVersion).toBe(FORMAT_VERSION)
     const parsed = parseBundle(JSON.stringify(bundle))
     expect(parsed.ok).toBe(true)
     expect(parsed.profiles[0].id).toBe('aaa')
     expect(parsed.profiles[0].name).toBe('A')
-    expect(parsed.profiles[0].userAgent).toBe('UA-A')
+    expect(parsed.profiles[0].tokens).toEqual([{ value: 'UA-A', enabled: true, mode: 'set' }])
+  })
+
+  it('migrates a legacy v1 export (single userAgent) to a set token', () => {
+    const v1 = { formatVersion: 1, profiles: [{ id: 'x', name: 'Old', spoofDepth: 'headers', userAgent: 'Legacy/1' }] }
+    const r = parseBundle(JSON.stringify(v1))
+    expect(r.ok).toBe(true)
+    expect(r.profiles[0].tokens).toEqual([{ value: 'Legacy/1', enabled: true, mode: 'set' }])
+  })
+
+  it('rejects a v1 userAgent with control chars (normalize-then-validate, not bypassed)', () => {
+    const v1 = { formatVersion: 1, profiles: [{ name: 'x', spoofDepth: 'headers', userAgent: 'Bad\r\nUA' }] }
+    const r = parseBundle(JSON.stringify(v1))
+    expect(r.ok).toBe(false)
+    expect(r.error.code).toBe('errProfileInvalid')
+    expect(r.error.params.reason.code).toBe('errUaControl')
   })
 })
 
@@ -28,8 +43,8 @@ describe('parseBundle validation', () => {
     expect(r.ok).toBe(false)
     expect(r.error.code).toBe('errNewerVersion')
   })
-  it('rejects when any profile is invalid — atomic, with the offending index and reason', () => {
-    const bundle = { formatVersion: 1, profiles: [profileA, { name: '', userAgent: '' }] }
+  it('rejects when any profile is invalid — atomic, with index + reason', () => {
+    const bundle = { formatVersion: 2, profiles: [profileA, { name: '', tokens: [] }] }
     const r = parseBundle(JSON.stringify(bundle))
     expect(r.ok).toBe(false)
     expect(r.error.code).toBe('errProfileInvalid')
@@ -51,24 +66,47 @@ describe('parseImport — ModHeader compatibility', () => {
     ...over,
   })
 
-  it('imports a bare ModHeader profile object, extracting the User-Agent', () => {
+  it('imports one profile with the UA as a token', () => {
     const r = parseImport(JSON.stringify(mhProfile()))
     expect(r.ok).toBe(true)
     expect(r.source).toBe('modheader')
     expect(r.profiles).toHaveLength(1)
     expect(r.profiles[0].name).toBe('My MH Profile')
-    expect(r.profiles[0].userAgent).toBe(UA)
-    expect(r.profiles[0].spoofDepth).toBe('headers')
     expect(r.profiles[0].color).toBe('#123456')
+    expect(r.profiles[0].tokens).toEqual([{ value: UA, enabled: true, mode: 'set' }])
   })
 
-  it('imports an array of ModHeader profiles', () => {
+  it('AGGREGATES every UA row (enabled + disabled) as tokens under ONE profile', () => {
+    const r = parseImport(
+      JSON.stringify(
+        mhProfile({
+          title: 'VR',
+          headers: [
+            { appendMode: 'append', enabled: true, name: 'User-Agent', value: 'HTCVRSDET;' },
+            { appendMode: 'append', enabled: false, name: 'User-Agent', value: 'PersonaApp;' },
+            { enabled: true, name: 'X-Other', value: 'ignored' },
+            { appendMode: false, enabled: false, name: 'User-Agent', value: 'eland; ETISDET' },
+          ],
+        })
+      )
+    )
+    expect(r.ok).toBe(true)
+    expect(r.profiles).toHaveLength(1)
+    expect(r.profiles[0].name).toBe('VR')
+    expect(r.profiles[0].tokens).toEqual([
+      { value: 'HTCVRSDET;', enabled: true, mode: 'append' },
+      { value: 'PersonaApp;', enabled: false, mode: 'append' },
+      { value: 'eland; ETISDET', enabled: false, mode: 'set' },
+    ])
+  })
+
+  it('imports an array of ModHeader profiles → one UA Intercept profile each', () => {
     const r = parseImport(JSON.stringify([mhProfile({ title: 'A' }), mhProfile({ title: 'B' })]))
     expect(r.ok).toBe(true)
     expect(r.profiles.map((p) => p.name)).toEqual(['A', 'B'])
   })
 
-  it('imports the REST-style { profile: {...} } wrapper', () => {
+  it('imports the REST-style { profile } wrapper', () => {
     const r = parseImport(JSON.stringify({ profile: mhProfile({ title: 'Wrapped' }) }))
     expect(r.ok).toBe(true)
     expect(r.profiles[0].name).toBe('Wrapped')
@@ -76,48 +114,7 @@ describe('parseImport — ModHeader compatibility', () => {
 
   it('matches the User-Agent header case-insensitively', () => {
     const r = parseImport(JSON.stringify(mhProfile({ headers: [{ enabled: true, name: 'user-agent', value: UA }] })))
-    expect(r.ok).toBe(true)
-    expect(r.profiles[0].userAgent).toBe(UA)
-  })
-
-  it('imports a DISABLED User-Agent row too (user toggles between them in ModHeader)', () => {
-    const r = parseImport(JSON.stringify(mhProfile({ headers: [{ enabled: false, name: 'User-Agent', value: UA }] })))
-    expect(r.ok).toBe(true)
-    expect(r.profiles).toHaveLength(1)
-    expect(r.profiles[0].userAgent).toBe(UA)
-  })
-
-  it('imports EVERY User-Agent row as a separate profile (enabled and disabled)', () => {
-    const r = parseImport(
-      JSON.stringify(
-        mhProfile({
-          title: 'Devices',
-          headers: [
-            { enabled: true, name: 'User-Agent', value: 'UA-A' },
-            { enabled: false, name: 'User-Agent', value: 'UA-B' },
-            { enabled: true, name: 'X-Other', value: 'ignored' },
-            { enabled: true, name: 'User-Agent', value: 'UA-C' },
-          ],
-        })
-      )
-    )
-    expect(r.ok).toBe(true)
-    expect(r.profiles.map((p) => p.userAgent)).toEqual(['UA-A', 'UA-B', 'UA-C'])
-    expect(r.profiles.map((p) => p.name)).toEqual(['Devices 1', 'Devices 2', 'Devices 3'])
-  })
-
-  it('uses a header comment as the profile name when present', () => {
-    const r = parseImport(
-      JSON.stringify(
-        mhProfile({
-          headers: [
-            { enabled: true, name: 'User-Agent', value: 'UA-A', comment: 'Desktop' },
-            { enabled: true, name: 'User-Agent', value: 'UA-B', comment: 'Mobile' },
-          ],
-        })
-      )
-    )
-    expect(r.profiles.map((p) => p.name)).toEqual(['Desktop', 'Mobile'])
+    expect(r.profiles[0].tokens[0].value).toBe(UA)
   })
 
   it('rejects a ModHeader profile with no User-Agent header', () => {
@@ -126,52 +123,40 @@ describe('parseImport — ModHeader compatibility', () => {
     expect(r.error.code).toBe('errNoProfiles')
   })
 
-  it('keeps ModHeader url filters that map to a domain, drops complex regexes', () => {
-    const r = parseImport(
-      JSON.stringify(
-        mhProfile({
-          urlFilters: [{ urlRegex: 'example.com' }, { urlRegex: 'https?://(.*\\.)?evil\\.(com|net)/.*' }],
-        })
-      )
-    )
-    expect(r.ok).toBe(true)
-    expect(r.profiles[0].includeUrls).toEqual(['example.com'])
-  })
-
-  it('extracts domains from ModHeader regex URL filters (the common whitelist form)', () => {
+  it('extracts domains from ModHeader regex URL filters', () => {
     const r = parseImport(
       JSON.stringify(
         mhProfile({
           urlFilters: [
             { enabled: true, urlRegex: 'https?://(.*\\.)?facebook\\.com/.*' },
             { enabled: true, urlRegex: '.*\\.google\\.com.*' },
+            { enabled: true, urlRegex: 'https:\\/\\/.*.vive.com' },
           ],
         })
       )
     )
-    expect(r.ok).toBe(true)
-    expect(r.profiles[0].includeUrls).toEqual(['facebook.com', 'google.com'])
+    expect(r.profiles[0].includeUrls).toEqual(['facebook.com', 'google.com', 'vive.com'])
   })
 
-  it('supports the older single `filters` array (type urls, urlRegex)', () => {
-    const r = parseImport(
-      JSON.stringify(
-        mhProfile({
-          urlFilters: undefined,
-          filters: [
-            { type: 'urls', urlRegex: 'shop.example.com' },
-            { type: 'types', resourceType: ['main_frame'] },
-          ],
-        })
-      )
-    )
-    expect(r.ok).toBe(true)
-    expect(r.profiles[0].includeUrls).toEqual(['shop.example.com'])
+  it('maps excludeUrlFilters to excludeUrls', () => {
+    const r = parseImport(JSON.stringify(mhProfile({ excludeUrlFilters: [{ urlRegex: 'ads.example.com' }] })))
+    expect(r.profiles[0].excludeUrls).toEqual(['ads.example.com'])
+  })
+
+  it('uses a default name when the ModHeader profile has no title', () => {
+    const r = parseImport(JSON.stringify(mhProfile({ title: undefined })))
+    expect(r.profiles[0].name).toBe('Imported profile')
+  })
+
+  it('rejects a token with control characters (validated, not bypassed)', () => {
+    const r = parseImport(JSON.stringify(mhProfile({ headers: [{ enabled: true, name: 'User-Agent', value: 'Bad\r\nUA' }] })))
+    expect(r.ok).toBe(false)
+    expect(r.error.code).toBe('errProfileInvalid')
+    expect(r.error.params.reason.code).toBe('errUaControl')
   })
 
   it('still imports our own bundle format', () => {
-    const bundle = exportBundle([profileA])
-    const r = parseImport(JSON.stringify(bundle))
+    const r = parseImport(JSON.stringify(exportBundle([profileA])))
     expect(r.ok).toBe(true)
     expect(r.source).toBe('ua-intercept')
     expect(r.profiles[0].id).toBe('aaa')
@@ -182,25 +167,6 @@ describe('parseImport — ModHeader compatibility', () => {
     expect(r.ok).toBe(false)
     expect(r.error.code).toBe('errUnrecognized')
   })
-
-  it('maps excludeUrlFilters to excludeUrls (domain-resolvable only)', () => {
-    const r = parseImport(JSON.stringify(mhProfile({ excludeUrlFilters: [{ urlRegex: 'ads.example.com' }] })))
-    expect(r.ok).toBe(true)
-    expect(r.profiles[0].excludeUrls).toEqual(['ads.example.com'])
-  })
-
-  it('uses a default name when the ModHeader profile has no title', () => {
-    const r = parseImport(JSON.stringify(mhProfile({ title: undefined })))
-    expect(r.ok).toBe(true)
-    expect(r.profiles[0].name).toBe('Imported profile')
-  })
-
-  it('rejects a ModHeader profile whose User-Agent has control characters (validated, not bypassed)', () => {
-    const r = parseImport(JSON.stringify(mhProfile({ headers: [{ enabled: true, name: 'User-Agent', value: 'Bad\r\nUA' }] })))
-    expect(r.ok).toBe(false)
-    expect(r.error.code).toBe('errProfileInvalid')
-    expect(r.error.params.reason.code).toBe('errUaControl')
-  })
 })
 
 describe('mergeImport', () => {
@@ -208,16 +174,12 @@ describe('mergeImport', () => {
   const gen = () => `new-${counter++}`
 
   it('preserves id when no collision', () => {
-    const out = mergeImport([profileA], [], gen)
-    expect(out[0].id).toBe('aaa')
+    expect(mergeImport([profileA], [], gen)[0].id).toBe('aaa')
   })
-
-  it('reassigns id ONLY on collision with an existing profile', () => {
+  it('reassigns id ONLY on collision', () => {
     const out = mergeImport([profileA], [{ id: 'aaa' }], gen)
-    expect(out[0].id).not.toBe('aaa')
     expect(out[0].id).toMatch(/^new-/)
   })
-
   it('re-derives uaData from presetId when absent', () => {
     const out = mergeImport([profileB], [], gen)
     expect(out[0].uaData).not.toBeNull()

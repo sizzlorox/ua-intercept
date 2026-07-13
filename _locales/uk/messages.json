@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "Відхилити"
+  },
+  "tokenHint": {
+    "message": "Увімкнені токени додаються до вашого справжнього User-Agent (або замінюють його в режимі “replace”)."
+  },
+  "tokenAdd": {
+    "message": "+ токен"
+  },
+  "tokenAppend": {
+    "message": "додати"
+  },
+  "tokenReplace": {
+    "message": "замінити"
+  },
+  "tokenEnabled": {
+    "message": "Увімкнено"
+  },
+  "tokenMode": {
+    "message": "Режим"
+  },
+  "tokenValue": {
+    "message": "Токен User-Agent"
   }
 }

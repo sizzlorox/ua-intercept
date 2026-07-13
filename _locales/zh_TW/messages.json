@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "關閉"
+  },
+  "tokenHint": {
+    "message": "已啟用的權杖會附加至您真實的 User-Agent（在「取代」模式下則會取代它）。"
+  },
+  "tokenAdd": {
+    "message": "+ 權杖"
+  },
+  "tokenAppend": {
+    "message": "附加"
+  },
+  "tokenReplace": {
+    "message": "取代"
+  },
+  "tokenEnabled": {
+    "message": "已啟用"
+  },
+  "tokenMode": {
+    "message": "模式"
+  },
+  "tokenValue": {
+    "message": "User-Agent 權杖"
   }
 }

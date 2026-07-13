@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "खारिज करें"
+  },
+  "tokenHint": {
+    "message": "सक्षम टोकन आपके असली User-Agent में जोड़े जाते हैं (या “replace” मोड में उसे बदल देते हैं)।"
+  },
+  "tokenAdd": {
+    "message": "+ टोकन"
+  },
+  "tokenAppend": {
+    "message": "जोड़ें"
+  },
+  "tokenReplace": {
+    "message": "बदलें"
+  },
+  "tokenEnabled": {
+    "message": "सक्षम"
+  },
+  "tokenMode": {
+    "message": "मोड"
+  },
+  "tokenValue": {
+    "message": "User-Agent टोकन"
   }
 }

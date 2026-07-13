@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "Tutup"
+  },
+  "tokenHint": {
+    "message": "Token yang aktif ditambahkan ke User-Agent asli Anda (atau menggantinya, dalam mode “replace”)."
+  },
+  "tokenAdd": {
+    "message": "+ token"
+  },
+  "tokenAppend": {
+    "message": "tambah"
+  },
+  "tokenReplace": {
+    "message": "ganti"
+  },
+  "tokenEnabled": {
+    "message": "Aktif"
+  },
+  "tokenMode": {
+    "message": "Mode"
+  },
+  "tokenValue": {
+    "message": "Token User-Agent"
   }
 }

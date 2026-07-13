@@ -6,6 +6,18 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-07-13
+
+### Added
+
+- **User-Agent tokens**: a profile now holds a list of toggleable UA tokens, each **append** (add to your real User-Agent) or **replace**. The sent User-Agent is your real UA plus the enabled append tokens (or a replace value). Editor gets a token list (checkbox + mode + value + remove + add).
+
+### Fixed
+
+- **ModHeader import** now aggregates each ModHeader profile into **one** UA Intercept profile, its UA rows becoming the token list (enabled state + append/replace mode preserved) — instead of exploding every row into its own profile. Import format bumped to v2 (v1 exports still import).
+
+[0.1.2]: https://github.com/sizzlorox/ua-intercept/compare/v0.1.1...v0.1.2
+
 ## [0.1.1] - 2026-07-13
 
 ### Fixed
@@ -37,6 +49,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Full spoof does not cover Web Workers and is detectable (page-readable config channel; JS-accessor overrides). See the README.
 
-[Unreleased]: https://github.com/sizzlorox/ua-intercept/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/sizzlorox/ua-intercept/compare/v0.1.2...HEAD
 [0.1.1]: https://github.com/sizzlorox/ua-intercept/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/sizzlorox/ua-intercept/releases/tag/v0.1.0

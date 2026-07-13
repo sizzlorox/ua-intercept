@@ -1,6 +1,7 @@
 import { getProfiles, setProfiles, getState, setState } from '../shared/storage.js'
 import { PRESETS, presetById } from '../core/presets.js'
 import { validateProfile, normalizeProfile } from '../core/schema.js'
+import { effectiveUaPreview } from '../core/ua.js'
 import { exportBundle, parseImport, mergeImport } from '../core/porting.js'
 import { formatError } from '../core/errors.js'
 import { t, localizeDom } from '../shared/i18n.js'
@@ -50,7 +51,7 @@ function renderList() {
     cb.checked = enabled && p.id === activeId
     cb.addEventListener('change', () => toggleActive(p.id, cb.checked))
 
-    const name = el('span', { class: 'pname', title: p.userAgent || '' }, p.name || t('unnamed'))
+    const name = el('span', { class: 'pname', title: effectiveUaPreview(p) }, p.name || t('unnamed'))
     name.tabIndex = 0
     name.setAttribute('role', 'button')
     name.addEventListener('click', () => selectProfile(p.id))
@@ -100,7 +101,13 @@ async function removeProfile(id) {
 }
 
 function newProfile() {
-  draft = normalizeProfile({ id: crypto.randomUUID(), name: '', userAgent: '', spoofDepth: 'full', order: nextOrder() })
+  draft = normalizeProfile({
+    id: crypto.randomUUID(),
+    name: '',
+    tokens: [{ value: '', enabled: true, mode: 'append' }],
+    spoofDepth: 'headers',
+    order: nextOrder(),
+  })
   renderForm()
 }
 
@@ -124,18 +131,51 @@ function renderForm() {
   presetSel.value = draft.presetId || '__custom'
 
   $('f-name').value = draft.name
-  $('f-ua').value = draft.userAgent
   $('f-platform').value = draft.platform || ''
   $('f-mobile').checked = !!draft.mobile
   ;(draft.spoofDepth === 'headers' ? $('f-depth-headers') : $('f-depth-full')).checked = true
   $('f-include').value = (draft.includeUrls || []).join('\n')
   $('f-exclude').value = (draft.excludeUrls || []).join('\n')
+  renderTokens($)
 
+  $('f-add-token').addEventListener('click', () => {
+    draft.tokens.push({ value: '', enabled: true, mode: 'append' })
+    renderTokens($)
+    const inputs = $('f-tokens').querySelectorAll('.tk-val')
+    inputs[inputs.length - 1]?.focus()
+  })
   presetSel.addEventListener('change', () => applyPreset(presetSel.value, $))
   paneEl.querySelector('#edit-form').addEventListener('submit', (e) => { e.preventDefault(); save($) })
   $('f-duplicate').addEventListener('click', () => duplicate())
   $('f-delete').addEventListener('click', () => del())
   $('f-name').focus()
+}
+
+// Render the token rows from draft.tokens; edits update draft.tokens live.
+function renderTokens($) {
+  const box = $('f-tokens')
+  box.replaceChildren()
+  draft.tokens.forEach((tk, idx) => {
+    const cb = el('input', { type: 'checkbox', class: 'tk-en', 'aria-label': t('tokenEnabled') })
+    cb.checked = tk.enabled !== false
+    cb.addEventListener('change', () => (tk.enabled = cb.checked))
+
+    const mode = el('select', { class: 'tk-mode', 'aria-label': t('tokenMode') })
+    mode.append(new Option(t('tokenAppend'), 'append'), new Option(t('tokenReplace'), 'set'))
+    mode.value = tk.mode === 'set' ? 'set' : 'append'
+    mode.addEventListener('change', () => (tk.mode = mode.value))
+
+    const val = el('input', { type: 'text', class: 'tk-val', 'aria-label': t('tokenValue'), autocomplete: 'off' })
+    val.value = tk.value || ''
+    val.addEventListener('input', () => (tk.value = val.value))
+
+    const del = el('button', { type: 'button', class: 'tk-del', title: t('btnDelete'), 'aria-label': t('btnDelete') }, '✕')
+    del.addEventListener('click', () => { draft.tokens.splice(idx, 1); renderTokens($) })
+
+    const row = el('div', { class: 'token-row' })
+    row.append(cb, mode, val, del)
+    box.append(row)
+  })
 }
 
 function applyPreset(id, $) {
@@ -145,20 +185,24 @@ function applyPreset(id, $) {
   draft.presetId = preset.id
   draft.uaData = preset.uaData
   if (!$('f-name').value.trim()) $('f-name').value = preset.label
-  $('f-ua').value = preset.userAgent
+  // a preset is a single "set" (switch-browser) token
+  draft.tokens = [{ value: preset.userAgent, enabled: true, mode: 'set' }]
+  draft.platform = preset.platform || ''
   $('f-platform').value = preset.platform || ''
   $('f-mobile').checked = !!preset.mobile
+  ;($('f-depth-full')).checked = true
+  renderTokens($)
 }
 
 async function save($) {
   draft.name = $('f-name').value.trim()
-  draft.userAgent = $('f-ua').value.trim()
   draft.platform = $('f-platform').value.trim()
   draft.mobile = $('f-mobile').checked
   draft.spoofDepth = $('f-depth-headers').checked ? 'headers' : 'full'
   draft.presetId = $('f-preset').value === '__custom' ? null : $('f-preset').value
   draft.includeUrls = splitLines($('f-include').value)
   draft.excludeUrls = splitLines($('f-exclude').value)
+  draft.tokens = (draft.tokens || []).filter((tk) => tk.value && tk.value.trim())
 
   const v = validateProfile(draft)
   if (!v.ok) { toast(formatError(v.error, t), true); return }

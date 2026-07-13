@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "閉じる"
+  },
+  "tokenHint": {
+    "message": "有効なトークンは実際の User-Agent に追加されます（「置換」モードでは置き換えられます）。"
+  },
+  "tokenAdd": {
+    "message": "+ トークン"
+  },
+  "tokenAppend": {
+    "message": "追加"
+  },
+  "tokenReplace": {
+    "message": "置換"
+  },
+  "tokenEnabled": {
+    "message": "有効"
+  },
+  "tokenMode": {
+    "message": "モード"
+  },
+  "tokenValue": {
+    "message": "User-Agent トークン"
   }
 }

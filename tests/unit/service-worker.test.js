@@ -6,14 +6,14 @@ const { store, fx, reset } = globalThis.__chrome
 const fullProfile = {
   id: 'p1',
   name: 'Windows Chrome',
-  userAgent: 'FakeChrome/131',
+  tokens: [{ value: 'FakeChrome/131', enabled: true, mode: 'set' }],
   spoofDepth: 'full',
   color: '#123456',
   platform: 'Win32',
   mobile: false,
   uaData: { brands: [{ brand: 'Chromium', version: '131' }], chPlatform: 'Windows' },
 }
-const headersProfile = { id: 'p2', name: 'Bot', userAgent: 'Bot/1', spoofDepth: 'headers' }
+const headersProfile = { id: 'p2', name: 'Bot', tokens: [{ value: 'Bot/1', enabled: true, mode: 'set' }], spoofDepth: 'headers' }
 
 beforeEach(reset)
 

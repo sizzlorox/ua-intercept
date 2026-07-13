@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "Kapat"
+  },
+  "tokenHint": {
+    "message": "Etkin tokenlar gerçek User-Agent değerinize eklenir (veya “replace” modunda onun yerine geçer)."
+  },
+  "tokenAdd": {
+    "message": "+ token"
+  },
+  "tokenAppend": {
+    "message": "ekle"
+  },
+  "tokenReplace": {
+    "message": "değiştir"
+  },
+  "tokenEnabled": {
+    "message": "Etkin"
+  },
+  "tokenMode": {
+    "message": "Mod"
+  },
+  "tokenValue": {
+    "message": "User-Agent tokenı"
   }
 }

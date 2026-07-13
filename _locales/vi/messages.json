@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "Bỏ qua"
+  },
+  "tokenHint": {
+    "message": "Các token được bật sẽ được nối vào User-Agent thật của bạn (hoặc thay thế nó, ở chế độ “replace”)."
+  },
+  "tokenAdd": {
+    "message": "+ token"
+  },
+  "tokenAppend": {
+    "message": "nối thêm"
+  },
+  "tokenReplace": {
+    "message": "thay thế"
+  },
+  "tokenEnabled": {
+    "message": "Đã bật"
+  },
+  "tokenMode": {
+    "message": "Chế độ"
+  },
+  "tokenValue": {
+    "message": "Token User-Agent"
   }
 }

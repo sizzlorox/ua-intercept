@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "닫기"
+  },
+  "tokenHint": {
+    "message": "활성화된 토큰은 실제 User-Agent에 추가됩니다(“replace” 모드에서는 대체됩니다)."
+  },
+  "tokenAdd": {
+    "message": "+ 토큰"
+  },
+  "tokenAppend": {
+    "message": "추가"
+  },
+  "tokenReplace": {
+    "message": "대체"
+  },
+  "tokenEnabled": {
+    "message": "사용"
+  },
+  "tokenMode": {
+    "message": "모드"
+  },
+  "tokenValue": {
+    "message": "User-Agent 토큰"
   }
 }

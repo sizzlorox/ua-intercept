@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "忽略"
+  },
+  "tokenHint": {
+    "message": "启用的标记会追加到你的真实 User-Agent 之后（在“替换”模式下则替换它）。"
+  },
+  "tokenAdd": {
+    "message": "+ 标记"
+  },
+  "tokenAppend": {
+    "message": "追加"
+  },
+  "tokenReplace": {
+    "message": "替换"
+  },
+  "tokenEnabled": {
+    "message": "已启用"
+  },
+  "tokenMode": {
+    "message": "模式"
+  },
+  "tokenValue": {
+    "message": "User-Agent 标记"
   }
 }

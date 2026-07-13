@@ -215,5 +215,26 @@
   },
   "updateDismiss": {
     "message": "تجاهل"
+  },
+  "tokenHint": {
+    "message": "تُضاف الرموز المُفعَّلة إلى User-Agent الحقيقي (أو تحل محله في وضع “الاستبدال”)."
+  },
+  "tokenAdd": {
+    "message": "+ رمز"
+  },
+  "tokenAppend": {
+    "message": "إلحاق"
+  },
+  "tokenReplace": {
+    "message": "استبدال"
+  },
+  "tokenEnabled": {
+    "message": "مُفعَّل"
+  },
+  "tokenMode": {
+    "message": "الوضع"
+  },
+  "tokenValue": {
+    "message": "رمز User-Agent"
   }
 }
