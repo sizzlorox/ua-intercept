@@ -2,7 +2,9 @@ import { validateProfile, normalizeProfile } from './schema.js'
 import { presetById } from './presets.js'
 import { extractDomain } from './url-filter.js'
 
-export const FORMAT_VERSION = 1
+// v2 stores a per-profile `tokens` list; v1 stored a single `userAgent` string.
+// normalizeProfile migrates v1 -> v2 on import, so we accept both.
+export const FORMAT_VERSION = 2
 
 /** Serialize every stored profile field (incl. uaData) into a versioned bundle. */
 export function exportBundle(profiles) {
@@ -34,12 +36,15 @@ export function parseBundle(jsonText) {
   if (!Array.isArray(data.profiles)) {
     return { ok: false, error: { code: 'errNoProfiles' } }
   }
-  for (let i = 0; i < data.profiles.length; i++) {
-    const v = validateProfile(data.profiles[i])
+  // Normalize FIRST, then validate — so a migrated v1 `userAgent` (now a token) is
+  // control-char checked like any other. Validating the raw profile would skip it.
+  const profiles = data.profiles.map(normalizeProfile)
+  for (let i = 0; i < profiles.length; i++) {
+    const v = validateProfile(profiles[i])
     // reason is itself a { code } error, resolved recursively by the UI's formatError.
     if (!v.ok) return { ok: false, error: { code: 'errProfileInvalid', params: { index: i + 1, reason: v.error } } }
   }
-  return { ok: true, profiles: data.profiles.map(normalizeProfile) }
+  return { ok: true, profiles }
 }
 
 /**
@@ -83,40 +88,38 @@ function modHeaderProfiles(data) {
   return null
 }
 
-// Convert one ModHeader profile to UA Intercept profiles — ONE per User-Agent
-// header row, INCLUDING disabled ones (a ModHeader profile often holds several
-// UA strings the user toggles between; importing them all lets the user switch
-// the same way here). Empty array if the profile has no User-Agent header.
-// ModHeader is header-only, so imports default to `headers` depth; id is left
-// unset (mergeImport assigns one). The profile's URL filters carry to each.
+// Convert ONE ModHeader profile to ONE UA Intercept profile. Its User-Agent
+// header rows (enabled AND disabled) become the profile's token list, preserving
+// each row's enabled state and append/set mode — mirroring how a ModHeader profile
+// groups several toggleable UA tokens. Returns [] if there is no User-Agent header.
+// ModHeader is header-only, so depth defaults to `headers`; id is left unset
+// (mergeImport assigns one). URL filters carry over to the profile.
 function modHeaderToProfiles(mh) {
   if (!mh || typeof mh !== 'object') return []
   const headers = Array.isArray(mh.headers) ? mh.headers : []
-  const uas = headers.filter(
-    (h) => h && typeof h.name === 'string' && h.name.toLowerCase() === 'user-agent' && h.value
-  )
-  if (!uas.length) return []
+  const tokens = headers
+    .filter((h) => h && typeof h.name === 'string' && h.name.toLowerCase() === 'user-agent' && h.value)
+    .map((h) => ({
+      value: String(h.value),
+      enabled: h.enabled !== false,
+      // ModHeader appendMode "append" -> append; anything else (false/override) -> set
+      mode: h.appendMode === 'append' ? 'append' : 'set',
+    }))
+  if (!tokens.length) return []
 
   const title = (typeof mh.title === 'string' && mh.title.trim()) || 'Imported profile'
-  // color/backgroundColor is often absent (ModHeader only exports styles on request);
-  // normalizeProfile supplies the default. UA values may be ModHeader templates like
-  // "{{uuid}}" — imported verbatim (the user's own data).
   const color = typeof mh.backgroundColor === 'string' ? mh.backgroundColor : undefined
-  const includeUrls = mapFilters([...toArray(mh.urlFilters), ...toArray(mh.filters)])
-  const excludeUrls = mapFilters(mh.excludeUrlFilters)
-  const single = uas.length === 1
-
-  return uas.map((h, i) =>
+  return [
     normalizeProfile({
-      name: (typeof h.comment === 'string' && h.comment.trim()) || (single ? title : `${title} ${i + 1}`),
-      userAgent: String(h.value),
+      name: title,
+      tokens,
       spoofDepth: 'headers',
       presetId: null,
       color,
-      includeUrls,
-      excludeUrls,
-    })
-  )
+      includeUrls: mapFilters([...toArray(mh.urlFilters), ...toArray(mh.filters)]),
+      excludeUrls: mapFilters(mh.excludeUrlFilters),
+    }),
+  ]
 }
 
 function toArray(v) {
