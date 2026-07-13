@@ -19,34 +19,44 @@ const CH_HIGH = [
   'sec-ch-ua-wow64',
 ]
 
-export function deriveClientHints(profile) {
+// `effUa` is the effectiveUa(profile) result ({mode,value} | null).
+// Client-Hint headers are only manipulated for a preset-style SET UA that carries
+// uaData — i.e. a real "switch browser" spoof. Append-token profiles keep the
+// browser's real identity, so we leave sec-ch-ua* untouched for them.
+export function deriveClientHints(profile, effUa) {
   const uaData = profile.uaData
+  const isSet = !!(effUa && effUa.mode === 'set')
   const hasData = !!(uaData && Array.isArray(uaData.brands) && uaData.brands.length > 0)
   const headerOps = []
 
-  if (hasData) {
+  if (isSet && hasData) {
     headerOps.push({ header: 'sec-ch-ua', operation: 'set', value: brandString(uaData.brands) })
     headerOps.push({ header: 'sec-ch-ua-mobile', operation: 'set', value: profile.mobile ? '?1' : '?0' })
     headerOps.push({ header: 'sec-ch-ua-platform', operation: 'set', value: `"${uaData.chPlatform || ''}"` })
-    // Strip ALL high-entropy hints on the wire; the JS surface still reports fake
-    // values via injectConfig (getHighEntropyValues), which stays consistent.
     for (const h of CH_HIGH) headerOps.push({ header: h, operation: 'remove' })
-  } else {
+  } else if (isSet) {
+    // Non-Chromium set UA (Safari/Firefox/custom): strip Chromium hints so they
+    // don't contradict the fake UA.
     for (const h of [...CH_LOW, ...CH_HIGH]) headerOps.push({ header: h, operation: 'remove' })
   }
+  // append-only (or no UA change): no client-hint changes.
 
+  const uaValue = effUa ? effUa.value : ''
   const injectConfig = {
-    userAgent: profile.userAgent,
-    platform: profile.platform || '',
-    mobile: !!profile.mobile,
-    vendor: vendorFor(profile.userAgent, hasData),
-    brands: hasData ? uaData.brands : [],
-    fullVersionList: hasData ? uaData.fullVersionList || [] : [],
-    platformVersion: hasData ? uaData.platformVersion || '' : '',
-    chPlatform: hasData ? uaData.chPlatform || '' : '',
-    architecture: hasData ? uaData.architecture || '' : '',
-    bitness: hasData ? uaData.bitness || '' : '',
-    model: hasData ? uaData.model || '' : '',
+    uaMode: effUa ? effUa.mode : null, // 'set' | 'append' | null
+    uaValue,
+    platform: isSet ? profile.platform || '' : '',
+    // Only meaningful for a Chromium set UA (the only case userAgentData is spoofed);
+    // must match the sec-ch-ua-mobile wire header above so a page can't cross-check them.
+    mobile: isSet && hasData ? !!profile.mobile : false,
+    vendor: isSet ? vendorFor(uaValue, hasData) : '',
+    brands: isSet && hasData ? uaData.brands : [],
+    fullVersionList: isSet && hasData ? uaData.fullVersionList || [] : [],
+    platformVersion: isSet && hasData ? uaData.platformVersion || '' : '',
+    chPlatform: isSet && hasData ? uaData.chPlatform || '' : '',
+    architecture: isSet && hasData ? uaData.architecture || '' : '',
+    bitness: isSet && hasData ? uaData.bitness || '' : '',
+    model: isSet && hasData ? uaData.model || '' : '',
   }
 
   return { headerOps, injectConfig }

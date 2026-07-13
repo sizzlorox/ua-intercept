@@ -19,16 +19,25 @@
     } catch {
       return
     }
-    if (!cfg || typeof cfg.userAgent !== 'string' || !cfg.userAgent) return
+    if (!cfg || typeof cfg.uaValue !== 'string' || !cfg.uaValue) return
 
-    define('userAgent', cfg.userAgent)
-    // appVersion is the UA with the "Mozilla/" prefix stripped — keep it consistent.
-    define('appVersion', cfg.userAgent.replace(/^Mozilla\//, ''))
-    if (cfg.platform) define('platform', cfg.platform)
-    if (typeof cfg.vendor === 'string') define('vendor', cfg.vendor)
+    // Effective UA: a "set" replaces it; an "append" tacks the tokens onto the
+    // browser's real UA (read here, before we redefine the getter).
+    const realUa = navigator.userAgent
+    const ua = cfg.uaMode === 'append' ? `${realUa} ${cfg.uaValue}` : cfg.uaValue
+    define('userAgent', ua)
+    define('appVersion', ua.replace(/^Mozilla\//, ''))
 
+    const isSet = cfg.uaMode === 'set'
     const brands = Array.isArray(cfg.brands) ? cfg.brands : []
     const fullVersionList = Array.isArray(cfg.fullVersionList) ? cfg.fullVersionList : []
+
+    // platform, vendor, and userAgentData only change for a "set" (switch-browser)
+    // spoof. An append token augments the real UA and keeps the real browser identity.
+    if (!isSet) return
+
+    if (cfg.platform) define('platform', cfg.platform)
+    if (typeof cfg.vendor === 'string' && cfg.vendor) define('vendor', cfg.vendor)
 
     // Only touch userAgentData on engines that natively have it (Chromium does,
     // Firefox does not). Adding one on Firefox would itself be a fingerprint tell.

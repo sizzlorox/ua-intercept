@@ -1,5 +1,6 @@
 import { urlFilterFrom } from './url-filter.js'
 import { deriveClientHints } from './client-hints.js'
+import { effectiveUa } from './ua.js'
 
 // MUST include main_frame explicitly — omitting resourceTypes matches every type
 // EXCEPT main_frame, silently skipping the top-level document (the request that
@@ -28,15 +29,21 @@ export const RULE_SERVER_TIMING = 2
 export function buildRules(profile) {
   if (!profile) return []
 
-  const requestHeaders = [{ header: 'user-agent', operation: 'set', value: profile.userAgent }]
+  const eff = effectiveUa(profile) // { mode:'set'|'append', value } | null
+  const requestHeaders = []
+  if (eff) requestHeaders.push({ header: 'user-agent', operation: eff.mode, value: eff.value })
+
   const full = profile.spoofDepth === 'full'
   let injectConfig = null
 
   if (full) {
-    const derived = deriveClientHints(profile)
+    const derived = deriveClientHints(profile, eff)
     requestHeaders.push(...derived.headerOps)
     injectConfig = derived.injectConfig
   }
+
+  // Nothing to change (no enabled tokens and no client-hint ops) → no rules.
+  if (!requestHeaders.length) return []
 
   const rules = [
     {
@@ -47,7 +54,7 @@ export function buildRules(profile) {
     },
   ]
 
-  if (full) {
+  if (full && injectConfig) {
     // Rule B: Server-Timing config channel, read synchronously at document_start.
     rules.push({
       id: RULE_SERVER_TIMING,
