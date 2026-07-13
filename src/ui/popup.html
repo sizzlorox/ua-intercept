@@ -54,12 +54,17 @@
       fieldset { border: 0; margin: 0; padding: 0; }
       legend { font-size: 12px; color: var(--muted); padding: 0 0 4px; }
       .profiles { list-style: none; margin: 0 0 8px; padding: 0; max-height: 180px; overflow-y: auto; }
-      .profiles li { margin: 0; }
+      .profiles li { margin: 0; display: flex; align-items: center; }
+      .profiles li:hover { background: var(--card); border-radius: 6px; }
       .profiles label {
-        display: flex; align-items: center; gap: 8px; padding: 6px 8px;
+        flex: 1; display: flex; align-items: center; gap: 8px; padding: 6px 8px;
         border-radius: 6px; cursor: pointer;
       }
-      .profiles label:hover { background: var(--card); }
+      .profiles .del-x {
+        border: 0; background: transparent; color: var(--danger); font-size: 14px;
+        line-height: 1; padding: 2px 8px; border-radius: 5px; cursor: pointer; visibility: hidden;
+      }
+      .profiles li:hover .del-x, .profiles li:focus-within .del-x { visibility: visible; }
       .actions { display: flex; gap: 8px; margin-top: 8px; }
       button, .linkbtn {
         font: inherit; cursor: pointer; border-radius: 6px;

@@ -1,4 +1,4 @@
-import { getState, setState, getProfiles, getUpdate, setUpdate } from '../shared/storage.js'
+import { getState, setState, getProfiles, setProfiles, getUpdate, setUpdate } from '../shared/storage.js'
 import { t, localizeDom } from '../shared/i18n.js'
 
 const master = document.getElementById('master')
@@ -77,8 +77,10 @@ async function render() {
     input.addEventListener('change', () => selectProfile(p.id))
     const label = el('label', { for: id })
     label.append(input, document.createTextNode(p.name))
+    const del = el('button', { class: 'del-x', title: t('btnDelete'), 'aria-label': t('btnDelete') + ': ' + p.name }, '✕')
+    del.addEventListener('click', () => removeProfile(p.id))
     const li = el('li')
-    li.append(label)
+    li.append(label, del)
     list.append(li)
   }
   fs.append(list)
@@ -89,6 +91,16 @@ async function selectProfile(id) {
   await setState({ enabled: true, activeProfileId: id })
   master.checked = true
   masterLabel.textContent = t('on')
+  render()
+}
+
+async function removeProfile(id) {
+  const [state, profiles] = await Promise.all([getState(), getProfiles()])
+  const p = profiles.find((x) => x.id === id)
+  if (!p) return
+  if (!confirm(t('confirmDelete', [p.name || t('unnamed')]))) return
+  await setProfiles(profiles.filter((x) => x.id !== id))
+  if (state.activeProfileId === id) await setState({ ...state, enabled: false, activeProfileId: null })
   render()
 }
 

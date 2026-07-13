@@ -9,6 +9,7 @@ localizeDom()
 
 let profiles = []
 let activeId = null
+let enabled = false
 let draft = null // the profile currently in the form (a working copy)
 
 const listEl = document.getElementById('profile-list')
@@ -19,6 +20,7 @@ async function load() {
   let state
   ;[profiles, state] = await Promise.all([getProfiles(), getState()])
   activeId = state.activeProfileId
+  enabled = state.enabled
   profiles = profiles.slice().sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
   renderList()
 
@@ -40,10 +42,15 @@ function renderList() {
   listEl.replaceChildren()
   for (const p of profiles) {
     const li = document.createElement('li')
-    if (draft && draft.id === p.id) li.classList.add('active')
+    if (draft && draft.id === p.id) li.classList.add('editing')
 
-    const dot = el('span', { class: 'dot' }, p.id === activeId ? '●' : '○')
-    const name = el('span', { class: 'pname' }, p.name || t('unnamed'))
+    // checkbox = "this User-Agent is active". Only one can be, so checking one
+    // deactivates the rest (a request sends a single User-Agent).
+    const cb = el('input', { type: 'checkbox', class: 'active-cb', 'aria-label': t('activeProfile') + ': ' + p.name })
+    cb.checked = enabled && p.id === activeId
+    cb.addEventListener('change', () => toggleActive(p.id, cb.checked))
+
+    const name = el('span', { class: 'pname', title: p.userAgent || '' }, p.name || t('unnamed'))
     name.tabIndex = 0
     name.setAttribute('role', 'button')
     name.addEventListener('click', () => selectProfile(p.id))
@@ -51,16 +58,45 @@ function renderList() {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectProfile(p.id) }
     })
 
-    const ord = el('span', { class: 'ord' })
-    const up = el('button', { class: 'icon', title: t('moveUp'), 'aria-label': t('moveUp') + ': ' + p.name }, '▲')
-    const down = el('button', { class: 'icon', title: t('moveDown'), 'aria-label': t('moveDown') + ': ' + p.name }, '▼')
-    up.addEventListener('click', () => move(p.id, -1))
-    down.addEventListener('click', () => move(p.id, 1))
-    ord.append(up, down)
+    const del = el('button', { class: 'del-x', title: t('btnDelete'), 'aria-label': t('btnDelete') + ': ' + p.name }, '✕')
+    del.addEventListener('click', () => removeProfile(p.id))
 
-    li.append(dot, name, ord)
+    li.append(cb, name, del)
     listEl.append(li)
   }
+}
+
+async function toggleActive(id, checked) {
+  const s = await getState()
+  if (checked) {
+    enabled = true
+    activeId = id
+    await setState({ ...s, enabled: true, activeProfileId: id })
+  } else {
+    enabled = false
+    await setState({ ...s, enabled: false })
+  }
+  renderList()
+}
+
+async function removeProfile(id) {
+  const p = profiles.find((x) => x.id === id)
+  if (!p) return
+  if (!confirm(t('confirmDelete', [p.name || t('unnamed')]))) return
+  profiles = profiles.filter((x) => x.id !== id)
+  if (activeId === id) {
+    activeId = null
+    enabled = false
+    await setState({ enabled: false, activeProfileId: null })
+  }
+  if (draft && draft.id === id) {
+    draft = null
+    paneEl.innerHTML = placeholderHTML
+    localizeDom(paneEl)
+  }
+  await persist()
+  renderList()
+  toast(t('toastDeleted'))
 }
 
 function newProfile() {
@@ -145,26 +181,7 @@ async function duplicate() {
 }
 
 async function del() {
-  if (!draft) return
-  if (!confirm(t('confirmDelete', [draft.name || t('unnamed')]))) return
-  profiles = profiles.filter((p) => p.id !== draft.id)
-  if (activeId === draft.id) { activeId = null; await setState({ enabled: false, activeProfileId: null }) }
-  draft = null
-  await persist()
-  paneEl.innerHTML = placeholderHTML
-  localizeDom(paneEl)
-  renderList()
-  toast(t('toastDeleted'))
-}
-
-async function move(id, dir) {
-  const i = profiles.findIndex((p) => p.id === id)
-  const j = i + dir
-  if (i < 0 || j < 0 || j >= profiles.length) return
-  ;[profiles[i], profiles[j]] = [profiles[j], profiles[i]]
-  profiles.forEach((p, k) => (p.order = k))
-  await persist()
-  renderList()
+  if (draft) await removeProfile(draft.id)
 }
 
 async function doExport() {
@@ -232,7 +249,9 @@ chrome.storage.onChanged.addListener((changes, area) => {
     renderList()
   }
   if (changes.state) {
-    activeId = changes.state.newValue ? changes.state.newValue.activeProfileId ?? null : null
+    const s = changes.state.newValue || {}
+    activeId = s.activeProfileId ?? null
+    enabled = !!s.enabled
     renderList()
   }
 })
@@ -243,6 +262,7 @@ const reportErr = (e) => {
 }
 
 document.getElementById('new-btn').addEventListener('click', newProfile)
+document.getElementById('add-ua').addEventListener('click', newProfile)
 document.getElementById('export-btn').addEventListener('click', () => doExport().catch(reportErr))
 document.getElementById('import-btn').addEventListener('click', () => document.getElementById('import-file').click())
 document.getElementById('import-file').addEventListener('change', (e) => {

@@ -27,15 +27,29 @@
       main { display: grid; grid-template-columns: 260px 1fr; gap: 0; min-height: calc(100vh - 60px); }
       .list-pane { border-right: 1px solid var(--border); padding: 12px; }
       .edit-pane { padding: 16px 20px; max-width: 640px; }
-      ul.profiles { list-style: none; margin: 0 0 12px; padding: 0; }
+      ul.profiles { list-style: none; margin: 0 0 8px; padding: 0; }
       ul.profiles li {
-        display: flex; align-items: center; gap: 6px; padding: 6px 8px;
-        border-radius: 6px; cursor: pointer;
+        display: flex; align-items: center; gap: 8px; padding: 6px 6px;
+        border-radius: 6px; border: 1px solid transparent;
       }
-      ul.profiles li.active { background: var(--card); font-weight: 600; }
-      ul.profiles li .dot { color: var(--accent); width: 12px; }
-      ul.profiles li .pname { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-      ul.profiles li .ord { display: flex; flex-direction: column; }
+      ul.profiles li:hover { background: var(--card); }
+      ul.profiles li.editing { background: var(--card); border-color: var(--border); }
+      ul.profiles li .active-cb { flex: 0 0 auto; cursor: pointer; margin: 0; }
+      ul.profiles li .pname {
+        flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer;
+      }
+      ul.profiles li.editing .pname { font-weight: 600; }
+      ul.profiles li .pname:hover { text-decoration: underline; }
+      ul.profiles li .del-x {
+        flex: 0 0 auto; border: 0; background: transparent; color: var(--danger);
+        font-size: 15px; line-height: 1; padding: 2px 6px; border-radius: 5px; cursor: pointer; visibility: hidden;
+      }
+      ul.profiles li:hover .del-x, ul.profiles li:focus-within .del-x { visibility: visible; }
+      #add-ua {
+        width: 100%; text-align: left; color: var(--accent); background: transparent;
+        border: 1px dashed var(--border); border-radius: 6px; padding: 7px 10px; cursor: pointer;
+      }
+      #add-ua:hover { border-color: var(--accent); }
       label.field { display: block; margin-bottom: 12px; }
       label.field > span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 3px; }
       input[type='text'], textarea, select {
@@ -85,6 +99,7 @@
     <main>
       <nav class="list-pane" data-i18n-title="profiles" aria-label="Profiles">
         <ul class="profiles" id="profile-list"></ul>
+        <button id="add-ua">+ <span data-i18n="btnNew">New</span></button>
         <div class="settings">
           <label>
             <input type="checkbox" id="check-updates" />
