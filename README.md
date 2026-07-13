@@ -140,6 +140,10 @@ See [`specs/001-ua-switcher/`](./specs/001-ua-switcher) for the spec, plan, data
 
 Contributions are welcome! Please read [CONTRIBUTING.md](./CONTRIBUTING.md) and our [Code of Conduct](./CODE_OF_CONDUCT.md). Good first issues: add a preset, add/improve a translation, or help validate the `document_start` race on real sites.
 
+## Privacy
+
+No data collection, no tracking, no account. Profiles stay on your device; the only network request is an opt-in, default-off update check to GitHub's public API. See [PRIVACY.md](./PRIVACY.md).
+
 ## Security
 
 Found a vulnerability? Please **don't** open a public issue — see [SECURITY.md](./SECURITY.md) for private reporting.
