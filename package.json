@@ -38,6 +38,6 @@
     "lint:firefox": "npm run build:firefox && npx --yes web-ext lint --source-dir dist/firefox"
   },
   "devDependencies": {
-    "vitest": "^2.1.9"
+    "vitest": "^3.2.6"
   }
 }
