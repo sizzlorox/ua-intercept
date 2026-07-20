@@ -1,6 +1,7 @@
 import { getProfiles, setProfiles, getState, setState } from '../shared/storage.js'
 import { PRESETS, presetById } from '../core/presets.js'
 import { validateProfile, normalizeProfile } from '../core/schema.js'
+import { buildRules } from '../core/dnr-rules.js'
 import { effectiveUaPreview } from '../core/ua.js'
 import { exportBundle, parseImport, mergeImport } from '../core/porting.js'
 import { formatError } from '../core/errors.js'
@@ -15,7 +16,9 @@ let draft = null // the profile currently in the form (a working copy)
 
 const listEl = document.getElementById('profile-list')
 const paneEl = document.getElementById('edit-pane')
-const placeholderHTML = paneEl.innerHTML
+// Snapshot of the empty edit pane, kept as nodes (not HTML) so restoring it never touches innerHTML.
+const placeholderNodes = [...paneEl.childNodes].map((n) => n.cloneNode(true))
+const restorePlaceholder = () => paneEl.replaceChildren(...placeholderNodes.map((n) => n.cloneNode(true)))
 
 async function load() {
   let state
@@ -88,11 +91,11 @@ async function removeProfile(id) {
   if (activeId === id) {
     activeId = null
     enabled = false
-    await setState({ enabled: false, activeProfileId: null })
+    await setState({ ...(await getState()), enabled: false, activeProfileId: null })
   }
   if (draft && draft.id === id) {
     draft = null
-    paneEl.innerHTML = placeholderHTML
+    restorePlaceholder()
     localizeDom(paneEl)
   }
   await persist()
@@ -105,7 +108,10 @@ function newProfile() {
     id: crypto.randomUUID(),
     name: '',
     tokens: [{ value: '', enabled: true, mode: 'append' }],
-    spoofDepth: 'headers',
+    // Matches normalizeProfile's default and what applyPreset selects. The old
+    // 'headers' default left navigator.userAgent reporting the real value, which
+    // reads as "the extension is broken".
+    spoofDepth: 'full',
     order: nextOrder(),
   })
   renderForm()
@@ -206,6 +212,11 @@ async function save($) {
 
   const v = validateProfile(draft)
   if (!v.ok) { toast(formatError(v.error, t), true); return }
+  // Saving a profile that yields no DNR rules is the single most confusing failure in
+  // this extension: it activates, the badge lights, and nothing is spoofed. Keyed on
+  // the rule output rather than on tokens — a full-depth uaData profile legitimately
+  // has no UA token but still emits client-hint rules.
+  if (buildRules(draft).length === 0) { toast(t('errUaRequired'), true); return }
 
   const i = profiles.findIndex((p) => p.id === draft.id)
   if (i >= 0) profiles[i] = { ...draft }

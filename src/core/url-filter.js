@@ -44,6 +44,17 @@ export function extractDomain(pattern) {
   // Take the FIRST domain-like token (label(.label)+.tld). Not splitting on "/" or
   // "?" first — those appear as regex quantifiers in ModHeader patterns like
   // "https?://(.*\.)?example\.com/.*" and must not truncate the host.
-  const m = s.toLowerCase().match(/([a-z0-9-]+\.)+[a-z]{2,}/)
-  return m ? m[0] : null
+  s = s.toLowerCase()
+  const m = s.match(/([a-z0-9-]+\.)+[a-z]{2,}/)
+  if (m) return m[0]
+
+  // An IPv4 literal has no alphabetic TLD, so the pattern above never matches one.
+  const ip = s.match(/\d{1,3}(?:\.\d{1,3}){3}/)
+  if (ip && ip[0].split('.').every((o) => Number(o) <= 255)) return ip[0]
+
+  // A dotless host ("localhost", an intranet name). Only accepted when the whole host
+  // section is a clean label — otherwise regex noise like ".*" would be read as a host.
+  // Without this, scoping a profile to localhost fails CLOSED and silently kills it.
+  const host = s.split(/[/:?#]/)[0]
+  return /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(host) ? host : null
 }

@@ -1,6 +1,6 @@
 {
   "name": "ua-intercept",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Chrome MV3 User-Agent switcher with importable/exportable profiles and selectable spoof depth.",
   "private": true,
   "type": "module",
@@ -33,6 +33,7 @@
     "build": "node scripts/build.mjs all",
     "build:chrome": "node scripts/build.mjs chrome",
     "build:firefox": "node scripts/build.mjs firefox",
+    "package": "npm run build && node scripts/package.mjs",
     "start:firefox": "npm run build:firefox && npx --yes web-ext run --source-dir dist/firefox",
     "lint:firefox": "npm run build:firefox && npx --yes web-ext lint --source-dir dist/firefox"
   },

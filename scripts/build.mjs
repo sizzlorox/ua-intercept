@@ -17,7 +17,12 @@ export function firefoxManifest(chrome) {
   const ff = structuredClone(chrome)
   delete ff.minimum_chrome_version // Chrome-only
   ff.browser_specific_settings = {
-    gecko: { id: 'ua-intercept@sizzlorox.github.io', strict_min_version: '128.0' },
+    gecko: {
+      id: 'ua-intercept@sizzlorox.github.io',
+      strict_min_version: '128.0',
+      // AMO requires this key. The extension collects and transmits nothing.
+      data_collection_permissions: { required: ['none'] },
+    },
   }
   // Firefox MV3 uses an event-page background (module scripts), not a SW.
   if (ff.background && ff.background.service_worker) {

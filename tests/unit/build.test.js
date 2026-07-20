@@ -23,6 +23,10 @@ describe('firefoxManifest transform', () => {
     expect('minimum_chrome_version' in ff).toBe(false)
   })
 
+  it('declares no data collection (AMO requires the key)', () => {
+    expect(ff.browser_specific_settings.gecko.data_collection_permissions).toEqual({ required: ['none'] })
+  })
+
   it('converts the service worker to an event-page module background', () => {
     expect(ff.background.service_worker).toBeUndefined()
     expect(ff.background.scripts).toEqual([chrome.background.service_worker])
