@@ -6,6 +6,22 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-07-20
+
+### Fixed
+
+- **Silent no-op failures.** Several ways to end up with an active profile that spoofed nothing, with no error anywhere:
+  - Turning the master switch on with no profile selected (or one left dangling by a delete/re-import) reconciled to "nothing active" and did nothing. It now adopts the first profile.
+  - Saving a profile that produces no rules — every token blank or disabled — is now rejected instead of saving a profile that can never take effect.
+  - Scoping a profile to `localhost` or a bare IP made the URL filter fail closed, disabling the profile everywhere. Both are now recognized hosts.
+- **The toolbar badge no longer reports success unconditionally.** Applying DNR rules and registering the injection both swallow their own errors, so a completely failed reconcile still lit a normal badge. A failed or no-op reconcile now shows a red badge and a `⚠` tooltip.
+- **`setState` no longer clobbers unrelated state** — selecting a profile from the popup, or deleting the active profile from the options page, silently reset `checkUpdates` to off.
+
+### Changed
+
+- New manually-created profiles default to **full** spoof depth, matching the schema default and the preset picker. The old `headers` default left `navigator.userAgent` reporting the real value, which reads as the extension being broken.
+- `npm run package` refuses to build from a dirty working tree (`ALLOW_DIRTY=1` overrides). v0.1.2 shipped bytes that were not reproducible from its tag.
+
 ## [0.1.2] - 2026-07-13
 
 ### Added
@@ -16,6 +32,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - **ModHeader import** now aggregates each ModHeader profile into **one** UA Intercept profile, its UA rows becoming the token list (enabled state + append/replace mode preserved) — instead of exploding every row into its own profile. Import format bumped to v2 (v1 exports still import).
 
+[0.1.3]: https://github.com/sizzlorox/ua-intercept/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/sizzlorox/ua-intercept/compare/v0.1.1...v0.1.2
 
 ## [0.1.1] - 2026-07-13
