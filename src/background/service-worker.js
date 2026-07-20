@@ -77,20 +77,23 @@ async function reconcile() {
     state.enabled && state.activeProfileId
       ? profiles.find((p) => p.id === state.activeProfileId) || null
       : null
-  await applyDnr(active)
-  await applyInjection(active)
-  applyBadge(active)
+  const dnrOk = await applyDnr(active)
+  const injOk = await applyInjection(active)
+  applyBadge(active, dnrOk && injOk)
 }
 
 // Toolbar indicator: colored badge + tooltip while a profile is active; cleared when off.
-function applyBadge(profile) {
+// A RED badge means the profile is active but did not take effect. Every apply step
+// swallows its own errors, so without this the badge would report success regardless.
+function applyBadge(profile, ok = true) {
   try {
     if (profile) {
       chrome.action.setBadgeText({ text: badgeText(profile.name) })
-      chrome.action.setBadgeBackgroundColor({ color: profile.color || '#2ea9af' })
+      chrome.action.setBadgeBackgroundColor({ color: ok ? profile.color || '#2ea9af' : '#c0392b' })
       chrome.action.setBadgeTextColor?.({ color: '#ffffff' })
       const depth = chrome.i18n.getMessage(profile.spoofDepth === 'full' ? 'depthFullShort' : 'depthHeadersShort')
-      chrome.action.setTitle({ title: `${chrome.i18n.getMessage('extName')} — ${profile.name} · ${depth}` })
+      const title = `${chrome.i18n.getMessage('extName')} — ${profile.name} · ${depth}`
+      chrome.action.setTitle({ title: ok ? title : `${title} ⚠` })
     } else {
       chrome.action.setBadgeText({ text: '' })
       chrome.action.setTitle({ title: chrome.i18n.getMessage('extName') })
@@ -108,8 +111,12 @@ async function applyDnr(profile) {
       removeRuleIds: existing.map((r) => r.id),
       addRules,
     })
+    // An active profile that produces no rules changes nothing — no enabled token, or
+    // a URL scope that matches nothing. That is a misconfiguration, not a success.
+    return !profile || addRules.length > 0
   } catch (e) {
     console.warn('[ua-intercept] DNR apply failed:', e)
+    return false
   }
 }
 
@@ -140,9 +147,11 @@ async function applyInjection(profile) {
     } else if (isRegistered) {
       await chrome.scripting.unregisterContentScripts({ ids: [OVERRIDE_ID] })
     }
+    return true
   } catch (e) {
     // Tolerate duplicate-id / nonexistent-id races; the next reconcile self-heals.
     console.warn('[ua-intercept] injection apply failed:', e)
+    return false
   }
 }
 

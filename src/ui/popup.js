@@ -88,7 +88,8 @@ async function render() {
 }
 
 async function selectProfile(id) {
-  await setState({ enabled: true, activeProfileId: id })
+  // Spread: setState overwrites wholesale, so dropping it would reset checkUpdates.
+  await setState({ ...(await getState()), enabled: true, activeProfileId: id })
   master.checked = true
   masterLabel.textContent = t('on')
   render()
@@ -105,8 +106,14 @@ async function removeProfile(id) {
 }
 
 master.addEventListener('change', async () => {
-  const state = await getState()
-  await setState({ ...state, enabled: master.checked })
+  const [state, profiles] = await Promise.all([getState(), getProfiles()])
+  // Switching on with no profile selected — or with an activeProfileId left dangling by
+  // a delete/re-import — reconciles to "nothing active" and silently does nothing at
+  // all. Adopt the first profile so the switch always has a visible effect.
+  const stillThere = profiles.some((p) => p.id === state.activeProfileId)
+  const activeProfileId =
+    master.checked && !stillThere ? (profiles.length ? profiles[0].id : null) : state.activeProfileId
+  await setState({ ...state, enabled: master.checked, activeProfileId })
   masterLabel.textContent = master.checked ? t('on') : t('off')
   render()
 })

@@ -42,6 +42,18 @@ describe('urlFilterFrom', () => {
     expect(c.requestDomains).toEqual(['invalid.invalid'])
   })
 
+  it('accepts dotless hosts and IPv4 literals (these used to fail closed and kill the profile)', () => {
+    expect(urlFilterFrom({ includeUrls: ['localhost'] }).requestDomains).toEqual(['localhost'])
+    expect(urlFilterFrom({ includeUrls: ['http://localhost:3000/app'] }).requestDomains).toEqual(['localhost'])
+    expect(urlFilterFrom({ includeUrls: ['192.168.1.10'] }).requestDomains).toEqual(['192.168.1.10'])
+    expect(urlFilterFrom({ includeUrls: ['https://10.0.0.5:8080/x'] }).requestDomains).toEqual(['10.0.0.5'])
+  })
+
+  it('still rejects regex noise rather than reading it as a dotless host', () => {
+    expect(urlFilterFrom({ includeUrls: ['.*'] }).requestDomains).toEqual(['invalid.invalid'])
+    expect(urlFilterFrom({ includeUrls: ['999.999.999.999'] }).requestDomains).toEqual(['invalid.invalid'])
+  })
+
   it('extracts the domain from ModHeader-style regex patterns', () => {
     const c = urlFilterFrom({
       includeUrls: ['.*\\.facebook\\.com.*', 'https?://(.*\\.)?example\\.com/.*', 'plain.dev'],
