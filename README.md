@@ -10,6 +10,8 @@
 [![Tests](https://img.shields.io/badge/tests-vitest-6da55f.svg)](#development)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
 
+[**Install for Chrome**](https://chromewebstore.google.com/detail/ua-intercept/ijcakdkfnionmpgdlmelljlnkccimlci) · [**Install for Firefox**](https://addons.mozilla.org/en-US/firefox/addon/ua-intercept/)
+
 </div>
 
 Unlike a generic header editor, UA Intercept does one thing well: it changes the User-Agent (and matching Client Hints) via named **profiles**, and lets you pick **how deep** the spoof goes — headers only, or a full override that page JavaScript sees too. It can import your existing **ModHeader** profiles, and the whole UI is localized into 20 languages.
@@ -55,7 +57,14 @@ Cross-browser by design — one codebase, per-browser packages.
 
 `src/core/` is identical across engines; only the manifest and a couple of feature guards differ. `npm run build` emits both packages into `dist/`.
 
-## Install (load unpacked)
+## Install
+
+| Store | Link |
+|---|---|
+| Chrome Web Store (Chrome/Edge/Brave/Opera/Vivaldi/Arc) | [chromewebstore.google.com/detail/ua-intercept](https://chromewebstore.google.com/detail/ua-intercept/ijcakdkfnionmpgdlmelljlnkccimlci) |
+| Firefox Add-ons | [addons.mozilla.org/firefox/addon/ua-intercept](https://addons.mozilla.org/en-US/firefox/addon/ua-intercept/) |
+
+### From source (load unpacked)
 
 **Chromium (Chrome/Edge/Brave/Opera/Vivaldi/Arc):**
 
